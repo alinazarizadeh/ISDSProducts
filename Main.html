@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS | محصولات هوش مصنوعی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --scene: min(92vmin, 82vh);
+    --ink:#1c2416; --gray:#7d8c6f;
+    --lime:#84cc16; --lime-dark:#4d7c0f; --lime-light:#ecfccb; --lime-mid:#bef264;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:'Vazirmatn',Tahoma,sans-serif;color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;
+    background:
+      radial-gradient(700px 340px at 12% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(700px 340px at 88% 100%, #f7fee7 0%, transparent 60%),
+      #fff;
+  }
+
+  /* ───── عنوان کوچک بالا ───── */
+  .title{margin-top:2.4vh;text-align:center}
+  .title .badge{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:clamp(12px,2vmin,16px);font-weight:800;padding:6px 22px;
+  }
+  .title .badge i{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 9px var(--lime)}
+
+  /* ───── صحنه نمودار ───── */
+  .scene{
+    position:relative;width:var(--scene);height:var(--scene);
+    margin:auto;
+  }
+
+  /* خطوط اتصال */
+  svg.lines{position:absolute;inset:0;width:100%;height:100%;z-index:1;animation:fade 1s .6s backwards}
+  svg.lines line{
+    stroke-width:2.2;stroke-dasharray:5 7;opacity:.45;
+    animation:dash 30s linear infinite;
+    transition:opacity .25s,stroke-width .25s;
+  }
+  svg.lines line.hot{opacity:1;stroke-width:3.4}
+  @keyframes dash{to{stroke-dashoffset:-500}}
+  @keyframes fade{from{opacity:0}}
+
+  /* حلقه‌های مداری تزئینی */
+  .ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    border-radius:50%;pointer-events:none;z-index:0}
+  .ring.r1{width:calc(var(--scene)*.75);height:calc(var(--scene)*.75);
+    border:2px dashed #d9e9bd;animation:spin 90s linear infinite}
+  .ring.r2{width:calc(var(--scene)*.95);height:calc(var(--scene)*.95);
+    border:1.5px dashed #e9f2d8;animation:spin 140s linear infinite reverse}
+  @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+  /* ───── مرکز: ISDS ───── */
+  .hub{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
+    width:calc(var(--scene)*.28);height:calc(var(--scene)*.28);border-radius:50%;
+    background:radial-gradient(circle at 32% 28%,#fff, #f6fdee);
+    border:3.5px solid var(--lime);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2%;
+    box-shadow:0 0 0 8px rgba(132,204,22,.12), 0 18px 40px -18px rgba(77,124,15,.55);
+    animation:breathe 4s ease-in-out infinite, pop .7s backwards;
+  }
+  .hub b{font-size:clamp(20px,5.6vmin,50px);font-weight:900;letter-spacing:1px;line-height:1.1}
+  .hub b em{font-style:normal;color:var(--lime-dark)}
+  .hub small{font-size:clamp(10px,2vmin,15px);color:var(--gray);font-weight:700}
+  @keyframes breathe{50%{box-shadow:0 0 0 14px rgba(132,204,22,.08),0 18px 44px -18px rgba(77,124,15,.6)}}
+  @keyframes pop{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}}
+
+  /* ───── گره‌های محصول ───── */
+  .node{
+    position:absolute;top:50%;left:50%;z-index:2;text-decoration:none;color:var(--ink);
+    width:calc(var(--scene)*.195);height:calc(var(--scene)*.195);
+    transform:translate(-50%,-50%)
+      rotate(var(--a)) translateX(calc(var(--scene)*.375)) rotate(calc(-1*var(--a)));
+    animation:nodein .6s cubic-bezier(.2,.8,.3,1.2) backwards;
+    animation-delay:calc(.15s + var(--i)*.08s);
+  }
+  @keyframes nodein{from{opacity:0}}
+  .nball{
+    width:100%;height:100%;border-radius:50%;
+    background:#fff;border:3px solid var(--c);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7%;
+    transition:transform .25s cubic-bezier(.2,.8,.3,1.3), box-shadow .25s, background .25s;
+    box-shadow:0 8px 22px -10px rgba(60,80,30,.25);
+  }
+  .nico{font-size:clamp(18px,4.4vmin,36px);line-height:1;transition:.25s}
+  .nname{
+    font-size:clamp(10px,2vmin,16px);font-weight:800;line-height:1.25;
+    text-align:center;padding:0 7%;color:var(--ink);transition:.25s;
+  }
+  /* هاور */
+  .node:hover .nball,.node:focus-visible .nball{
+    transform:scale(1.13);
+    background:linear-gradient(135deg,var(--c),var(--c2));
+    box-shadow:0 14px 34px -8px var(--c);
+  }
+  .node:hover .nico,.node:focus-visible .nico{transform:scale(1.15) rotate(-8deg)}
+  .node:hover .nname,.node:focus-visible .nname{color:#fff}
+
+  /* ───── راهنمای پایین ───── */
+  .hint{
+    margin-bottom:2.4vh;font-size:clamp(11px,2vmin,15px);
+    color:var(--gray);font-weight:600;text-align:center;
+  }
+  .hint b{color:var(--lime-dark)}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="title">
+  <span class="badge"><i></i>خانواده محصولات هوش مصنوعی ISDS</span>
+</div>
+
+<div class="scene" id="scene">
+  <svg class="lines" id="lines"></svg>
+  <span class="ring r1"></span>
+  <span class="ring r2"></span>
+
+  <div class="hub"><b>ISDS<em></em></b><small>هوش مصنوعی سازمانی</small></div>
+
+  <!-- x1: AI Factory -->
+  <a class="node" style="--i:0;--a:90deg;   --c:#84cc16;--c2:#4d7c0f" href="file:///D:/1405/ISDS/Products/catalog/Present/ISDS.html">
+    <span class="nball"><span class="nico">🏭</span><span class="nname">AI Factory</span></span></a>
+  <!-- x2: NEXUS STUDIO -->
+  <a class="node" style="--i:1;--a:45deg;   --c:#22c55e;--c2:#15803d" href="file:///D:/1405/ISDS/Products/catalog/Present/NEXUS.html">
+    <span class="nball"><span class="nico">🤖</span><span class="nname">NEXUS STUDIO</span></span></a>
+  <!-- x3: InsightAI -->
+  <a class="node" style="--i:2;--a:0deg;    --c:#10b981;--c2:#047857" href="file:///D:/1405/ISDS/Products/catalog/Present/InsightAI.html">
+    <span class="nball"><span class="nico">💬</span><span class="nname">InsightAI</span></span></a>
+  <!-- x4: CEO Assistant -->
+  <a class="node" style="--i:3;--a:-45deg;  --c:#f59e0b;--c2:#d97706" href="file:///D:/1405/ISDS/Products/catalog/Present/CEO AI.html">
+    <span class="nball"><span class="nico">👑</span><span class="nname">CEO Assistant</span></span></a>
+  <!-- x5: Student Assistant -->
+  <a class="node" style="--i:4;--a:-90deg;  --c:#0ea5e9;--c2:#0369a1" href="file:///D:/1405/ISDS/Products/catalog/Present/AI Student Assistant.html">
+    <span class="nball"><span class="nico">🎓</span><span class="nname">Student Assistant</span></span></a>
+  <!-- x6: Cloud Workbench -->
+  <a class="node" style="--i:5;--a:-135deg; --c:#14b8a6;--c2:#0f766e" href="file:///D:/1405/ISDS/Products/catalog/Present/Cloud Workbench.html">
+    <span class="nball"><span class="nico">💻</span><span class="nname">Cloud Workbench</span></span></a>
+  <!-- x7: Strategy Radar -->
+  <a class="node" style="--i:6;--a:180deg;  --c:#6366f1;--c2:#4338ca" href="file:///D:/1405/ISDS/Products/catalog/Present/Strategy Radar.html">
+    <span class="nball"><span class="nico">📡</span><span class="nname">Strategy Radar</span></span></a>
+  <!-- x8: Process Automation -->
+  <a class="node" style="--i:7;--a:135deg;  --c:#ef4444;--c2:#b91c1c" href="file:///D:/1405/ISDS/Products/catalog/Present/AI automation.html">
+    <span class="nball"><span class="nico">⚙️</span><span class="nname">Process Automation</span></span></a>
+</div>
+
+<div class="hint">برای مشاهدهٔ کاتالوگ، روی هر محصول <b>کلیک کنید</b></div>
+
+<script>
+/* خط اتصال مرکز به هر گره — با اندازه‌گیری واقعی DOM */
+const scene=document.getElementById('scene'),
+      svg=document.getElementById('lines'),
+      nodes=[...document.querySelectorAll('.node')];
+function draw(){
+  const s=scene.getBoundingClientRect();
+  svg.setAttribute('viewBox',`0 0 ${s.width} ${s.height}`);
+  svg.innerHTML='';
+  nodes.forEach(n=>{
+    const r=n.querySelector('.nball').getBoundingClientRect();
+    const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',s.width/2);  l.setAttribute('y1',s.height/2);
+    l.setAttribute('x2',r.left+r.width/2-s.left);
+    l.setAttribute('y2',r.top+r.height/2-s.top);
+    l.setAttribute('stroke',getComputedStyle(n).getPropertyValue('--c'));
+    svg.appendChild(l);
+    n.addEventListener('mouseenter',()=>l.classList.add('hot'));
+    n.addEventListener('mouseleave',()=>l.classList.remove('hot'));
+    n.addEventListener('focus',()=>l.classList.add('hot'));
+    n.addEventListener('blur', ()=>l.classList.remove('hot'));
+  });
+}
+addEventListener('resize',draw);
+addEventListener('load',draw);
+draw();
+</script>
+
+</body>
+</html>

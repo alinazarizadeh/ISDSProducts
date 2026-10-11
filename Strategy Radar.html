@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS Strategy Radar | هوش بازار و استراتژی سازمان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+    --amber: #f59e0b;
+    --amber-dark: #d97706;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark)}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  ul.feat li b{color:var(--ink)}
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Mini blocks ===== */
+  .mini{
+    background:linear-gradient(180deg,#fbfef5,#fff);
+    border:1.5px solid var(--line);border-radius:16px;padding:24px;
+  }
+  .mini h3{color:var(--lime-dark);font-weight:800;margin-bottom:8px;font-size:1.05rem}
+  .mini p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Chat bubbles ===== */
+  .chat{display:flex;flex-direction:column;gap:12px}
+  .bubble{
+    align-self:flex-start;max-width:88%;
+    background:linear-gradient(180deg,#fbfef5,#f4fbe9);
+    border:1px solid var(--lime-mid);
+    border-radius:4px 18px 18px 18px;
+    padding:12px 20px;font-size:.97rem;font-weight:600;color:var(--ink);
+    box-shadow:0 4px 14px rgba(132,204,22,.1);
+  }
+  .bubble small{display:block;font-weight:400;color:var(--gray);font-size:.8rem;margin-top:2px}
+
+  /* ===== Graphical process stepper ===== */
+  .flow-label{margin-top:22px;font-size:.82rem;font-weight:800;color:var(--lime-dark);display:flex;align-items:center;gap:8px}
+  .flow-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .pflow{display:flex;margin-top:16px}
+  .pstep{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;position:relative;text-align:center;padding:0 3px}
+  .pstep:not(:last-child)::before{
+    content:"";position:absolute;top:14.5px;right:50%;left:-50%;height:3px;z-index:0;
+    background:linear-gradient(-90deg,var(--lime-mid),var(--lime));
+  }
+  .pnum{
+    width:32px;height:32px;border-radius:50%;flex:none;z-index:1;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;font-weight:900;color:#fff;
+    background:linear-gradient(135deg,var(--lime),var(--lime-dark));
+    box-shadow:0 0 0 3px rgba(132,204,22,.15);
+  }
+  .pstep.human .pnum{
+    background:linear-gradient(135deg,var(--amber),var(--amber-dark));
+    box-shadow:0 0 0 3px rgba(245,158,11,.18);
+  }
+  .plabel{margin-top:8px;font-size:.76rem;font-weight:700;color:var(--ink);line-height:1.55}
+  .pstep.human .plabel{color:#b45309}
+
+  @media(max-width:640px){
+    .pflow{flex-direction:column}
+    .pstep{flex-direction:row;align-items:flex-start;gap:12px;text-align:right;padding:0 0 16px}
+    .pstep:last-child{padding-bottom:0}
+    .pstep:not(:last-child)::before{
+      top:32px;bottom:-16px;right:14.5px;left:auto;width:3px;height:auto;
+      background:linear-gradient(180deg,var(--lime-mid),var(--lime));
+    }
+    .plabel{margin-top:5px;font-size:.85rem}
+  }
+
+  /* ===== Stepper legend ===== */
+  .legend-mini{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}
+  .lg{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:var(--gray)}
+  .lg i{width:14px;height:14px;border-radius:50%;flex:none}
+  .lg-auto i{background:linear-gradient(135deg,var(--lime),var(--lime-dark))}
+  .lg-human i{background:linear-gradient(135deg,var(--amber),var(--amber-dark))}
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:step;margin-top:26px}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:640px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">ISDS STRATEGY RADAR<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#cycle">چرخه رصد تا تصمیم</a>
+      <a href="#market">بازار و رقبا</a>
+      <a href="#analysis">تحلیل و تصمیم</a>
+      <a href="#samples">نمونه تعامل</a>
+      <a href="#notes">ملاحظات</a>
+      <a href="#contact">شروع همکاری</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">ISDS Strategy Radar | هوش بازار و استراتژی سازمان</span>
+  <h1><em>چشمِ سازمان در بازار، همیشه باز</em><br>از رصد مستمر بازار و رقبا تا تدوین استراتژی مبتنی بر شواهد</h1>
+  <p>رصد خودکار بازار، رقبا و محیط کسب‌وکار، ترکیب این شواهد با داده‌های داخلی سازمان و تبدیل آن‌ها به تحلیل، سناریو و گزینه‌های استراتژیک — تا تصمیم‌های سازمان بر پایه اطلاعات به‌روز گرفته شود، نه گزارش‌های تأخیری و برداشت‌های پراکنده.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#contact">درخواست نمایش قابلیت‌ها</a>
+    <a class="btn btn-ghost" href="#cycle">مشاهده کاتالوگ</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p>تصمیم‌های استراتژیک سازمان معمولاً بر پایه اطلاعات ناقص، گزارش‌های قدیمی و برداشت‌های فردی گرفته می‌شوند؛ در حالی که بازار، رقبا و مقررات پیوسته در حال تغییرند. <strong>ISDS Strategy Radar</strong> مانند چشمانی همیشه باز، محیط بیرون سازمان را پیوسته رصد می‌کند، تغییرات مهم را شناسایی و هشدار می‌دهد و این شواهد را در کنار داده‌های داخلی سازمان قرار می‌دهد تا مدیران تصویری کامل، به‌روز و مستند برای تدوین استراتژی داشته باشند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">📡</span>رصد پیوسته بیرون</h3><p>بازار، رقبا، مقررات و روندها — بدون وقفه و بدون اتکا به گزارش‌های موردی.</p></div>
+      <div class="card"><h3><span class="ic">🔀</span>ترکیب بیرون و داخل</h3><p>شواهد بازار در کنار داده‌های فروش، مالی و عملیاتی سازمان؛ در یک تصویر واحد.</p></div>
+      <div class="card"><h3><span class="ic">🧭</span>تصمیم‌یاری مستند</h3><p>گزینه‌های استراتژیک با منابع و مستندات؛ قضاوت و تصمیم نهایی با مدیران سازمان.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 CYCLE ================= -->
+<section id="cycle">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>چرخه «از رصد تا تصمیم»</h2>
+      <p>Strategy Radar یک چرخه پیوسته است؛ خروجی هر تصمیم نیز توسط همین چرخه پایش و ارزیابی می‌شود.</p>
+    </div>
+    <div class="pflow">
+      <div class="pstep"><span class="pnum">۱</span><span class="plabel">رصد مستمر بازار و محیط</span></div>
+      <div class="pstep"><span class="pnum">۲</span><span class="plabel">جمع‌آوری و پالایش شواهد</span></div>
+      <div class="pstep"><span class="pnum">۳</span><span class="plabel">تحلیل و شناسایی روندها</span></div>
+      <div class="pstep"><span class="pnum">۴</span><span class="plabel">ترکیب با داده‌های سازمان</span></div>
+      <div class="pstep"><span class="pnum">۵</span><span class="plabel">پیشنهاد گزینه‌ها و سناریوها</span></div>
+      <div class="pstep human"><span class="pnum">۶</span><span class="plabel">تصمیم و جهت‌گیری مدیران</span></div>
+      <div class="pstep"><span class="pnum">۷</span><span class="plabel">پایش اجرا و بازخورد</span></div>
+    </div>
+    <div class="use-case" style="margin-top:26px"><b>نقش سامانه و انسان:</b> سامانه رصد، تحلیل و پیشنهاد را انجام می‌دهد؛ قضاوت استراتژیک، انتخاب مسیر و مسئولیت تصمیم با مدیران سازمان باقی می‌ماند. در نمودار بالا، <b>نقطه نارنجی</b> این مرز را نشان می‌دهد.</div>
+    <div class="legend-mini">
+      <span class="lg lg-auto"><i></i>مرحله خودکار — اجرا توسط سامانه</span>
+      <span class="lg lg-human"><i></i>تصمیم انسانی — قضاوت با مدیران</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 MARKET ================= -->
+<section id="market">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>رصد بازار و محیط کسب‌وکار</h2>
+      <p>سامانه منابع مشخص‌شده توسط سازمان را پیوسته پایش می‌کند و تحولات مؤثر بر کسب‌وکار را شناسایی و گزارش می‌دهد.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>رصد مستمر <b>اخبار، رویدادها و تحولات صنعت</b> در حوزه‌های تعریف‌شده</li>
+          <li>پیگیری <b>مقررات و سیاست‌های</b> تأثیرگذار بر سازمان</li>
+          <li>شناسایی <b>روندها و تغییرات تقاضا</b> در بازار هدف</li>
+          <li>پایش کانال‌های عمومی مرتبط با حوزه کسب‌وکار</li>
+          <li>تحلیل <b>حس و حال بازار</b> از محتوای منتشرشده</li>
+          <li>هشدار به‌موقع در صورت رخداد مهم</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>آگاهی مداوم از محیط بیرون، بدون وابستگی به جستجوی دستی و گزارش‌های موردی.</p>
+        <div class="use-case"><b>مثال:</b> ابلاغ مقررات جدید در حوزه فعالیت سازمان ← استخراج نکات مؤثر ← تحلیل اثر بر کسب‌وکار ← ارائه بریفینگ به مدیران.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 COMPETITORS ================= -->
+<section id="competitors">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>پایش و تحلیل رقبا</h2>
+      <p>برای هر رقیب، پروفایل پویا ساخته می‌شود و حرکت‌های او در طول زمان ثبت، تحلیل و در صورت نیاز هشدار داده می‌شود.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>پروفایل پویا برای هر رقیب: <b>محصولات، قیمت‌ها، اخبار و اطلاعیه‌ها</b></li>
+          <li>تشخیص تغییرات: قیمت جدید، محصول جدید، کمپین تبلیغاتی</li>
+          <li>رصد <b>آگهی‌های استخدام رقبا</b> به‌عنوان سیگنال جهت‌گیری استراتژیک</li>
+          <li>مقایسه عملکرد رقبا بر اساس <b>داده‌های عمومی و منتشرشده</b></li>
+          <li>ثبت تاریخچه حرکت‌ها برای تشخیص الگو و روند</li>
+          <li>هشدار در صورت حرکت‌های مؤثر رقبا</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>دانستن اینکه رقبا چه می‌کنند، چه می‌سازند و به کدام سمت حرکت می‌کنند — پیش از آنکه در بازار احساس شود.</p>
+        <div class="use-case"><b>مثال:</b> کاهش قیمت محصول رقیب ← تحلیل زمینه، دامنه و احتمال تداوم ← ارائه گزینه‌های واکنش برای تصمیم‌گیری مدیران.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 INTERNAL DATA ================= -->
+<section id="internal">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>یکپارچگی با داده‌های داخلی سازمان</h2>
+      <p>تحلیل بیرون به‌تنهایی کافی نیست؛ Strategy Radar شواهد بازار را در کنار عملکرد واقعی سازمان قرار می‌دهد تا تصویر کامل شکل بگیرد: «در این بازار چه می‌گذرد و ما در آن چه جایگاه و عملکردی داریم؟»</p>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+      <ul class="feat">
+        <li>اتصال به سامانه‌های سازمان: <b>ERP، CRM، مالی، فروش و عملیات</b></li>
+        <li>مقایسه عملکرد سازمان با <b>وضعیت بازار و رقبا</b></li>
+        <li>برآورد و پایش <b>جایگاه رقابتی</b> سازمان در حوزه‌های کلیدی</li>
+        <li>ترکیب شواهد بیرونی و داده‌های داخلی در یک <b>نمای واحد استراتژیک</b></li>
+        <li>لینک هر تحلیل به داده‌های پشتیبان آن برای شفافیت</li>
+      </ul>
+      <div class="use-case"><b>مثال:</b> افت سهم فروش در یک منطقه ← بررسی هم‌زمان رخدادهای بازار، حرکت رقبا و داده‌های داخلی ← ارائه تحلیل علت و گزینه‌های اقدام.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 STRATEGIC ANALYSIS ================= -->
+<section id="analysis">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۶</span><h2>تحلیل استراتژیک و سناریوپردازی</h2>
+      <p>ابزارهای تحلیل استراتژیک کلاسیک، این‌بار متصل به داده‌های زنده و به‌صورت خودکار به‌روزرسانی می‌شوند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="mini">
+        <h3>SWOT پویا</h3>
+        <p>نقاط قوت، ضعف، فرصت‌ها و تهدیدهای سازمان که با جدیدترین شواهد بازار و داده‌های داخلی به‌روزرسانی می‌شود؛ نه یک سند یک‌بار مصرف سالانه.</p>
+      </div>
+      <div class="mini">
+        <h3>سناریوپردازی</h3>
+        <p>بررسی «اگر... آنگاه...»: ورود رقیب جدید، تغییر قیمت، تغییر مقررات یا نوسان بازار؛ همراه با اثر محتمل هر سناریو بر سازمان.</p>
+      </div>
+      <div class="mini">
+        <h3>تحلیل روند</h3>
+        <p>بررسی روند شاخص‌های بازار و عملکرد سازمان در طول زمان و شناسایی تغییرات جهت‌دار پیش از تبدیل‌شدن به بحران.</p>
+      </div>
+    </div>
+    <div class="use-case" style="margin-top:20px"><b>کاربرد:</b> جلسات استراتژی و برنامه‌ریزی سالانه با اسناد زنده و مستند برگزار می‌شود؛ به‌جای جمع‌آوری دستی داده‌ها از ده‌ها منبع، مدیران روی تصمیم تمرکز می‌کنند.</div>
+  </div>
+</section>
+
+<!-- ================= 7 DECISION SUPPORT ================= -->
+<section id="decision">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۷</span><h2>پشتیبانی تصمیم و تدوین استراتژی</h2>
+      <p>سامانه گزینه‌ها، شواهد و پیامدها را ارائه می‌کند تا مدیران با اطلاعات کامل تصمیم بگیرند؛ <strong>تصمیم نهایی و مسئولیت آن با مدیران سازمان است.</strong></p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>ارائه <b>گزینه‌های اقدام</b> مستند به شواهد و منابع</li>
+          <li>مقایسه گزینه‌ها بر اساس <b>معیارهای تعریف‌شده سازمان</b></li>
+          <li>تشریح <b>پیامدها و ریسک‌های هر گزینه</b></li>
+          <li>تهیه <b>پیش‌نویس سند استراتژی</b> و اهداف بر اساس تصمیمات مدیران</li>
+          <li>پایش <b>اجرا و انحراف از استراتژی</b> و ارائه گزارش دوره‌ای</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>تبدیل جلسات استراتژیک از بحث بر سر «چه اتفاقی افتاده؟» به تصمیم‌گیری روی «چه مسیری و چرا؟».</p>
+        <div class="use-case"><b>مثال:</b> برای واکنش به ورود رقیب جدید، سه گزینه مستند با شواهد، پیامدها و ریسک‌ها ارائه می‌شود؛ مدیران گزینه را انتخاب و سامانه اجرای آن را پایش می‌کند.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 ALERTS & REPORTS ================= -->
+<section id="alerts">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۸</span><h2>هشدارها و گزارش‌های هوشمند</h2>
+      <p>اطلاعات استراتژیک فقط زمانی ارزش دارد که به‌موقع به دست تصمیم‌گیرندگان برسد.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">🚨 هشدار لحظه‌ای رخدادهای مهم بازار و رقبا</span>
+      <span class="tag">🗓️ گزارش دوره‌ای هفتگی و ماهانه بازار و رقبا</span>
+      <span class="tag">📋 بریفینگ پیش از جلسات مدیریتی</span>
+      <span class="tag">📈 گزارش پایش اجرای استراتژی و انحراف از هدف</span>
+      <span class="tag">🔔 تنظیم آستانه‌ها و قواعد هشدار سفارشی</span>
+    </div>
+    <div class="use-case" style="margin-top:22px"><b>مثال:</b> پیش از جلسه هیئت‌مدیره، خلاصه‌ای از مهم‌ترین تحولات بازار، حرکت‌های رقبا و وضعیت شاخص‌های سازمان به‌صورت خودکار آماده و توزیع می‌شود.</div>
+  </div>
+</section>
+
+<!-- ================= 9 SAMPLES ================= -->
+<section id="samples">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۹</span><h2>نمونه تعامل با سامانه</h2>
+      <p>پرسش به زبان طبیعی؛ پاسخ مستند به شواهد رصدشده و داده‌های سازمان.</p>
+    </div>
+    <div class="chat">
+      <div class="bubble">«رقیب اصلی‌مان قیمت محصول X را کاهش داده؛ چه اتفاقی افتاده و چه گزینه‌هایی برای واکنش داریم؟»<small>تحلیل رخداد، زمینه و ارائه گزینه‌های مستند</small></div>
+      <div class="bubble">«روند تقاضای بازار در سال گذشته چطور بوده و ما چه جایگاهی در آن داشتیم؟»<small>ترکیب شواهد بیرونی با داده‌های فروش سازمان</small></div>
+      <div class="bubble">«تغییرات مقرراتی این ماه که روی ما اثر می‌گذارد را خلاصه کن.»<small>پالایش ابلاغیه‌ها و تحلیل اثر</small></div>
+      <div class="bubble">«SWOT به‌روز ما نسبت به سه رقیب اصلی را ارائه کن.»<small>تحلیل استراتژیک به‌روزرسانی‌شده با شواهد</small></div>
+      <div class="bubble">«اگر رقیب Y وارد بازار شهرهای دوم شود، سناریوها و واکنش‌های پیشنهادی چیست؟»<small>سناریوپردازی با پیامدهای هر مسیر</small></div>
+      <div class="bubble">«گزارش هفتگی بازار و رقبا را برای جلسه مدیریتی آماده کن.»<small>تولید خودکار گزارش دوره‌ای</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 NOTES ================= -->
+<section id="notes">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۰</span><h2>الزامات و ملاحظات</h2>
+      <p>برای شفافیت کامل، محدوده‌ها و پیش‌نیازهای این راهکار به‌صورت شفاف تعریف می‌شود.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">📡</span>الزامات داده</h3>
+        <ul class="feat">
+          <li>پوشش رصد بیرونی به <b>دسترسی شبکه، مجوزها و منابع تعریف‌شده</b> وابسته است</li>
+          <li>فهرست منابع، حوزه‌ها و رقبای مورد رصد در آغاز پروژه مشخص می‌شود</li>
+          <li>جمع‌آوری اطلاعات رقبا صرفاً از <b>منابع عمومی و در چارچوب قانونی و اخلاقی</b> انجام می‌شود</li>
+          <li>تحلیل ترکیبی نیازمند اتصال به <b>سامانه‌های داخلی</b> سازمان است</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">⚖️</span>مرزهای نقش سامانه</h3>
+        <ul class="feat">
+          <li>عمق و دقت تحلیل تابع <b>کیفیت و پوشش داده‌ها</b> است</li>
+          <li>سامانه <b>گزینه و شواهد</b> ارائه می‌کند؛ نه پاسخ مطلق و قطعی</li>
+          <li><b>قضاوت استراتژیک و تصمیم نهایی</b> با مدیران سازمان است</li>
+          <li>استقرار در <b>زیرساخت داخلی سازمان (On-Premise)</b> امکان‌پذیر است</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 DEPLOY ================= -->
+<section id="contact" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۱</span><h2>استقرار و شروع همکاری</h2>
+      <p>Strategy Radar با قابلیت <strong>استقرار در زیرساخت داخلی سازمان</strong> ارائه می‌شود. حوزه‌های رصد، منابع اطلاعاتی، رقبا و قواعد هشدار، کاملاً متناسب با صنعت و نیاز هر سازمان پیکربندی می‌شود.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>تعیین حوزه و منابع</h3><p>بازار هدف، رقبا، منابع رصد و شاخص‌های مهم سازمان</p></div>
+      <div class="step"><h3>اتصال داده داخلی</h3><p>اتصال به سامانه‌های فروش، مالی و عملیاتی سازمان</p></div>
+      <div class="step"><h3>پیکربندی رصد</h3><p>تعریف قواعد هشدار، دوره‌های گزارش و ساختار تحلیل</p></div>
+      <div class="step"><h3>پایلوت و تنظیم</h3><p>اجرای پایلوت روی یک حوزه، ارزیابی کیفیت و تنظیم دقیق</p></div>
+      <div class="step"><h3>بهره‌برداری</h3><p>تعمیم به سایر حوزه‌ها و تحویل به چرخه تصمیم‌گیری سازمان</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>تصمیم‌های استراتژیک را با چشمِ باز بگیرید</h2>
+  <p>برای راه‌اندازی رادار استراتژی در سازمان خود و بررسی حوزه‌های قابل رصد، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست دمو</a>
+    <a class="btn btn-ghost" href="#">بررسی صنعت و حوزه سازمان شما</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>ISDS STRATEGY RADAR</b> — هوش بازار و استراتژی سازمان؛ چشمِ باز سازمان در بازار
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>

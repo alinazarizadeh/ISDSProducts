@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS Cloud Workbench | محیط توسعه ابری با زیرساخت GPU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark)}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  ul.feat li b{color:var(--ink)}
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Resource table ===== */
+  .rtbl{width:100%;border-collapse:collapse;margin-top:16px;font-size:.9rem}
+  .rtbl th{
+    background:var(--lime);color:#fff;font-weight:800;padding:10px 14px;text-align:right;
+  }
+  .rtbl th:first-child{border-start-start-radius:12px}
+  .rtbl th:last-child{border-start-end-radius:12px}
+  .rtbl td{
+    border:1.5px solid var(--line);padding:10px 14px;color:#3b4433;background:#fff;
+  }
+  .rtbl td b{color:var(--lime-dark)}
+  .rtbl tr:last-child td:first-child{border-end-start-radius:12px}
+  .rtbl tr:last-child td:last-child{border-end-end-radius:12px}
+
+  /* ===== Graphical process stepper ===== */
+  .flow-label{margin-top:22px;font-size:.82rem;font-weight:800;color:var(--lime-dark);display:flex;align-items:center;gap:8px}
+  .flow-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .pflow{display:flex;margin-top:16px}
+  .pstep{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;position:relative;text-align:center;padding:0 3px}
+  .pstep:not(:last-child)::before{
+    content:"";position:absolute;top:14.5px;right:50%;left:-50%;height:3px;z-index:0;
+    background:linear-gradient(-90deg,var(--lime-mid),var(--lime));
+  }
+  .pnum{
+    width:32px;height:32px;border-radius:50%;flex:none;z-index:1;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;font-weight:900;color:#fff;
+    background:linear-gradient(135deg,var(--lime),var(--lime-dark));
+    box-shadow:0 0 0 3px rgba(132,204,22,.15);
+  }
+  .plabel{margin-top:8px;font-size:.76rem;font-weight:700;color:var(--ink);line-height:1.55}
+
+  @media(max-width:640px){
+    .pflow{flex-direction:column}
+    .pstep{flex-direction:row;align-items:flex-start;gap:12px;text-align:right;padding:0 0 16px}
+    .pstep:last-child{padding-bottom:0}
+    .pstep:not(:last-child)::before{
+      top:32px;bottom:-16px;right:14.5px;left:auto;width:3px;height:auto;
+      background:linear-gradient(180deg,var(--lime-mid),var(--lime));
+    }
+    .plabel{margin-top:5px;font-size:.85rem}
+  }
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:step;margin-top:26px}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:640px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">ISDS CLOUD WORKBENCH<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#who">مخاطبان</a>
+      <a href="#cycle">چرخهٔ کار</a>
+      <a href="#ide">محیط کدنویسی</a>
+      <a href="#resources">منابع پردازشی</a>
+      <a href="#env">محیط‌ها و داده</a>
+      <a href="#team">تیم و مدیریت</a>
+      <a href="#contact">شروع همکاری</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">ISDS Cloud Workbench | میزکار ابری توسعه با زیرساخت GPU</span>
+  <h1><em>کد بزنید، زیرساخت با ما</em><br>محیط توسعه و محاسبات ابری، فقط با یک مرورگر</h1>
+  <p>محیط کدنویسی حرفه‌ای <strong>VS Code</strong> و <strong>Jupyter</strong> مستقیماً در مرورگر، به‌همراه منابع اختصاصی <strong>GPU، CPU، RAM و فضای ذخیره‌سازی</strong>؛ برای توسعه‌دهندگان، مهندسان هوش مصنوعی، تیم‌های داده و پژوهشگرانی که به توان محاسباتی نیاز دارند، نه دغدغهٔ سخت‌افزار و زیرساخت.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#contact">درخواست دسترسی آزمایشی</a>
+    <a class="btn btn-ghost" href="#resources">مشاهده کاتالوگ</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p>راه‌اندازی و نگهداری زیرساخت توسعه — خرید سخت‌افزار، نصب ابزارها، پیکربندی محیط‌ها و مدیریت منابع — زمان و هزینهٔ زیادی از تیم‌های فنی می‌گیرد. <strong>ISDS Cloud Workbench</strong> تمام این زیرساخت را به‌صورت ابری و آماده ارائه می‌کند: کاربر با مرورگر وارد محیط کاری خود می‌شود، منابع مورد نیاز پروژه را برمی‌دارد و بلافاصله کدنویسی، اجرا و آزمایش را آغاز می‌کند — از توسعهٔ نرم‌افزار و ساخت API تا آموزش مدل‌های هوش مصنوعی و تحلیل داده.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">💻</span>فقط یک مرورگر</h3><p>VS Code، نوت‌بوک Jupyter و ترمینال، بدون هیچ نصبی — از لپ‌تاپ شخصی، سیستم سازمانی یا خانه.</p></div>
+      <div class="card"><h3><span class="ic">⚡</span>توان پردازشی در لحظه</h3><p>تخصیص GPU و منابع متناسب با هر پروژه؛ از توسعهٔ سبک تا آموزش مدل‌های سنگین هوش مصنوعی.</p></div>
+      <div class="card"><h3><span class="ic">🧩</span>متمرکز بر توسعه</h3><p>محیط‌ها، داده‌ها و منابع یکجا مدیریت می‌شوند تا تمرکز تیم روی ساختن محصول بماند، نه نگهداری زیرساخت.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 WHO ================= -->
+<section id="who">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>برای چه کسانی؟</h2>
+      <p>هر کسی که به محیط توسعه و توان پردازشی نیاز دارد؛ بدون اینکه به ابزار یا حوزهٔ خاصی محدود باشد.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">👨‍💻</span>توسعه‌دهندگان نرم‌افزار</h3><p>محیط کاری یکسان و آماده روی هر دستگاه؛ توسعهٔ Backend، API و سرویس‌ها با منابع قابل تخصیص.</p></div>
+      <div class="card"><h3><span class="ic">🤖</span>مهندسان هوش مصنوعی</h3><p>GPU اختصاصی برای آموزش و Fine-tune مدل‌ها، اجرای Inference و آزمایش Pipelineهای پردازشی.</p></div>
+      <div class="card"><h3><span class="ic">📊</span>تیم‌های داده</h3><p>پردازش مجموعه‌داده‌های حجیم، اجرای ETL و تحلیل با RAM و CPU متناسب با حجم داده.</p></div>
+      <div class="card"><h3><span class="ic">🔬</span>پژوهشگران و دانشجویان</h3><p>اجرای شبیه‌سازی‌ها و محاسبات علمی، بدون خرید سخت‌افزار یا نوبت‌گیری از سرورهای اشتراکی.</p></div>
+      <div class="card"><h3><span class="ic">🚀</span>استارتاپ‌ها و تیم‌های کوچک</h3><p>زیرساخت حرفه‌ای بدون سرمایه‌گذاری اولیه روی سرور و کارت گرافیک؛ مقیاس‌پذیر با رشد تیم.</p></div>
+      <div class="card"><h3><span class="ic">🎓</span>آموزش و کارگاه‌ها</h3><p>محیط‌های آماده و یکسان برای کلاس‌های برنامه‌نویسی، دوره‌های هوش مصنوعی و کار عملی دانشجویان.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 CYCLE ================= -->
+<section id="cycle">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>چرخهٔ کار در Workbench</h2>
+      <p>از ساخت محیط تا تحویل خروجی، همهٔ مراحل در یک فضای واحد و بدون جابه‌جایی بین ابزارهای مختلف پیش می‌رود.</p>
+    </div>
+    <div class="pflow">
+      <div class="pstep"><span class="pnum">۱</span><span class="plabel">ساخت محیط و انتخاب منابع</span></div>
+      <div class="pstep"><span class="pnum">۲</span><span class="plabel">بارگذاری کد و داده</span></div>
+      <div class="pstep"><span class="pnum">۳</span><span class="plabel">توسعه، اجرا و آزمایش</span></div>
+      <div class="pstep"><span class="pnum">۴</span><span class="plabel">اجرای کارهای سنگین روی GPU</span></div>
+      <div class="pstep"><span class="pnum">۵</span><span class="plabel">ذخیره و تکرارپذیری</span></div>
+      <div class="pstep"><span class="pnum">۶</span><span class="plabel">اشتراک، استقرار یا تحویل خروجی</span></div>
+    </div>
+    <div class="use-case" style="margin-top:26px"><b>پیوستگی کار:</b> پروژه‌ها، محیط‌ها و داده‌ها بین نشست‌ها حفظ می‌شوند؛ کاربر هر بار که وارد شود، دقیقاً از همان‌جایی که رها کرده ادامه می‌دهد. کارهای طولانی نیز می‌توانند در پس‌زمینه و بدون اتصال دائم کاربر اجرا شوند.</div>
+  </div>
+</section>
+
+<!-- ================= 4 IDE ================= -->
+<section id="ide">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>محیط کدنویسی حرفه‌ای تحت وب</h2>
+      <p>همان ابزارهایی که توسعه‌دهندگان با آن‌ها کار می‌کنند — با همان ظاهر، میان‌برها و افزونه‌ها — این‌بار روی زیرساخت قدرتمند سازمان.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3><span class="ic">🧩</span>VS Code تحت وب</h3>
+        <ul class="feat">
+          <li>ویرایشگر کامل با افزونه‌های مورد نیاز</li>
+          <li>ترمینال لینوکسی در دسترس</li>
+          <li>پشتیبانی از Git و کنترل نسخه</li>
+          <li>اتصال به مخازن کد تیم</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">📓</span>Jupyter Notebook</h3>
+        <ul class="feat">
+          <li>نوت‌بوک‌های تعاملی با نمودار درون‌خطی</li>
+          <li>ترکیب متن، فرمول، کد و خروجی</li>
+          <li>مناسب نمونه‌سازی و تحلیل داده</li>
+          <li>اشتراک‌گذاری نوت‌بوک با همکاران</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🌐</span>توسعه و اجرای برنامه</h3>
+        <ul class="feat">
+          <li>پایتون، Node.js، R، Julia و سایر زبان‌ها</li>
+          <li>اجرای سرویس‌ها و برنامه‌های وب در حین توسعه</li>
+          <li>اجرای کارهای طولانی در پس‌زمینه</li>
+          <li>دسترسی از ویندوز، لینوکس، مک و موبایل</li>
+        </ul>
+      </div>
+    </div>
+    <div class="use-case" style="margin-top:22px"><b>مثال:</b> توسعه‌دهنده صبح در محل کار API مدل هوش مصنوعی را روی GPU تست می‌کند، عصر از خانه بدون نصب چیزی به همان محیط وصل می‌شود و سرویس در حال اجرا همان‌جا بالا مانده است.</div>
+  </div>
+</section>
+
+<!-- ================= 5 RESOURCES ================= -->
+<section id="resources">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>منابع پردازشی اختصاصی و قابل تخصیص</h2>
+      <p>هر محیط می‌تواند منابع متناسب با نیاز پروژه دریافت کند؛ از یک محیط سبک برای توسعهٔ روزمره تا چند GPU برای آموزش مدل‌های عمیق. منابع مصرف‌نشده آزاد و به پروژه‌های دیگر اختصاص می‌یابد.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">⚙️</span>انواع منابع قابل تخصیص</h3>
+        <ul class="feat">
+          <li><b>پردازنده (CPU):</b> تعداد هسته بر اساس نیاز پروژه</li>
+          <li><b>پردازنده گرافیکی (GPU):</b> یک یا چند کارت، برای یادگیری ماشین، پردازش تصویر و محاسبات سنگین</li>
+          <li><b>حافظه (RAM):</b> تا سطح مورد نیاز مجموعه‌داده‌ها و سرویس‌ها</li>
+          <li><b>فضای ذخیره‌سازی:</b> ماندگار و جدا برای هر پروژه</li>
+          <li>امکان تغییر منابع محیط در طول پروژه</li>
+          <li>روشن و خاموش کردن محیط برای مدیریت مصرف</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">📦</span>نمونه بسته‌های منابع</h3>
+        <table class="rtbl">
+          <thead>
+            <tr><th>بسته</th><th>پیکربندی نمونه</th><th>مناسب برای</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>پایه</b></td><td>۴ هسته CPU • ۱۶GB RAM • ۵۰GB فضا</td><td>توسعه نرم‌افزار، وب و آموزش</td></tr>
+            <tr><td><b>استاندارد</b></td><td>۸ هسته CPU • ۳۲GB RAM • ۱×GPU • ۲۰۰GB فضا</td><td>یادگیری ماشین، پردازش تصویر و داده</td></tr>
+            <tr><td><b>پیشرفته</b></td><td>۱۶+ هسته CPU • ۶۴GB+ RAM • چند GPU • ۵۰۰GB+ فضا</td><td>آموزش مدل‌های بزرگ و محاسبات سنگین</td></tr>
+          </tbody>
+        </table>
+        <div class="use-case" style="margin-top:16px"><b>توجه:</b> پیکربندی نهایی و سقف منابع هر کاربر، بر اساس زیرساخت سازمان، سیاست تخصیص و نوع پروژه تعیین می‌شود.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 ENV & DATA ================= -->
+<section id="env">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۶</span><h2>محیط‌های ایزوله، کتابخانه‌ها و داده‌ها</h2>
+      <p>هر پروژه محیط مستقل خود را دارد؛ نتیجه: ناسازگاری نسخه‌ها و وابستگی‌ها میان پروژه‌ها از بین می‌رود و هر محیط قابل بازتولید است.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">🧪</span>مدیریت محیط و وابستگی‌ها</h3>
+        <ul class="feat">
+          <li>محیط‌های مجازی مستقل برای هر پروژه (venv / Conda)</li>
+          <li>نصب کتابخانه‌ها و ابزارها، متناسب با سیاست استقرار</li>
+          <li>انتخاب نسخهٔ زبان و ابزارها برای هر پروژه</li>
+          <li>ثبت فهرست وابستگی‌ها برای <b>تکرارپذیری محیط</b></li>
+          <li>قالب آمادهٔ محیط برای پروژه‌های جدید و اعضای تیم</li>
+        </ul>
+        <div class="use-case"><b>مثال:</b> دو پروژه به دو نسخهٔ متفاوت از یک کتابخانه یا فریم‌ورک نیاز دارند؛ هر کدام در محیط ایزوله خود بدون تداخل اجرا می‌شوند.</div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🗄️</span>داده‌ها و ذخیره‌سازی ماندگار</h3>
+        <ul class="feat">
+          <li>فضای ذخیره‌سازی ماندگار برای کد، داده و خروجی‌ها</li>
+          <li>بارگذاری داده و فایل‌ها از رایانه شخصی</li>
+          <li>اشتراک فضای داده میان اعضای یک تیم</li>
+          <li>جدا بودن داده هر پروژه برای نظم و امنیت</li>
+          <li>دسترسی داده‌ها از داخل کد و نوت‌بوک</li>
+        </ul>
+        <div class="use-case"><b>مثال:</b> مجموعه‌داده مشترک تیم یک بار بارگذاری می‌شود و همهٔ اعضا از همان نسخهٔ واحد در توسعه و آزمایش استفاده می‌کنند.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 TEAM & MANAGEMENT ================= -->
+<section id="team">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۷</span><h2>همکاری تیمی، نظارت و امنیت</h2>
+      <p>برای تیم‌های فنی، سازمان‌ها و گروه‌های پژوهشی؛ با مدیریت متمرکز منابع و حفاظت از کد و داده.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3><span class="ic">👥</span>کار تیمی</h3>
+        <ul class="feat">
+          <li>اشتراک پروژه، نوت‌بوک و محیط با همکاران</li>
+          <li>نقش‌های مدیر فضای کاری و عضو</li>
+          <li>فضای داده و قالب محیط مشترک تیم</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">📊</span>نظارت و مدیریت</h3>
+        <ul class="feat">
+          <li>مشاهده مصرف منابع هر کاربر و پروژه</li>
+          <li>سقف‌گذاری و اولویت‌بندی منابع</li>
+          <li>گزارش وضعیت محیط‌های فعال</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🔒</span>امنیت کد و داده</h3>
+        <ul class="feat">
+          <li>استقرار در زیرساخت داخلی سازمان (On-Premise)</li>
+          <li>کد و داده بدون خروج از سازمان</li>
+          <li>جداسازی محیط کاربران از یکدیگر</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 USE CASES ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۸</span><h2>کاربردها</h2>
+      <p>نمونه‌هایی از مسیرهای استفاده از Workbench در حوزه‌های مختلف.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">🤖 توسعهٔ برنامه‌ها و سرویس‌های مبتنی بر هوش مصنوعی</span>
+      <span class="tag">🧠 آموزش و Fine-tune مدل‌های یادگیری عمیق روی GPU</span>
+      <span class="tag">🔌 ساخت و تست API و Backend با منابع واقعی</span>
+      <span class="tag">📉 پردازش داده، ETL و Pipelineهای تحلیلی</span>
+      <span class="tag">🌊 شبیه‌سازی‌های عددی و محاسبات مهندسی</span>
+      <span class="tag">🖼️ پردازش تصویر، سیگنال و داده‌های حسگری</span>
+      <span class="tag">📓 تدوین پایان‌نامه و مقاله با نوت‌بوک قابل تکرار</span>
+      <span class="tag">🎓 کلاس‌های برنامه‌نویسی و کارگاه‌های هوش مصنوعی</span>
+    </div>
+    <div class="grid grid-2" style="margin-top:22px">
+      <div class="use-case"><b>سناریوی تیم توسعه:</b> تیمی که سرویس بینایی ماشین می‌سازد، محیط مشترک با GPU برمی‌دارد؛ کد روی Git است، مدل‌ها روی فضای مشترک و هر عضو از هر دستگاهی به همان محیط وصل می‌شود.</div>
+      <div class="use-case"><b>سناریوی پژوهشی:</b> دانشجوی دکترا برای فصل تجربی پایان‌نامه به GPU نیاز دارد؛ به‌جای خرید سخت‌افزار، محیط مخصوص خود را برمی‌دارد، آموزش مدل را شب‌هنگام اجرا می‌کند و صبح نتایج را در نوت‌بوک می‌گیرد.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9 BENEFITS ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۹</span><h2>مزیت‌های کلیدی</h2>
+      <p>ارزش اصلی Workbench برای تیم‌های فنی و سازمان‌ها.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">💸 حذف هزینه خرید و نگهداری سخت‌افزار و سرور</span>
+      <span class="tag">🌍 دسترسی به محیط کاری از هر مکان و هر دستگاه</span>
+      <span class="tag">⏱️ راه‌اندازی پروژه جدید در چند دقیقه به‌جای چند روز</span>
+      <span class="tag">🔁 تکرارپذیری محیط‌ها و حذف مشکل «روی سیستم من کار می‌کرد»</span>
+      <span class="tag">🧮 استفاده بهینه از GPUها با تخصیص و آزادسازی هوشمند</span>
+      <span class="tag">🛡️ حفاظت از کد و داده در زیرساخت داخلی سازمان</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 DEPLOY / CTA ================= -->
+<section id="contact" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۰</span><h2>استقرار و شروع همکاری</h2>
+      <p><strong>ISDS Cloud Workbench</strong> با امکان <strong>استقرار در زیرساخت داخلی</strong> سازمان ارائه می‌شود و می‌تواند به‌صورت <strong>مستقل</strong> یا در کنار سایر محصولات ISDS استفاده شود. ظرفیت GPU و منابع، تعداد کاربران و سیاست‌های تخصیص، متناسب با ساختار و بودجهٔ هر مجموعه پیکربندی می‌گردد.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>بررسی نیاز</h3><p>شمار کاربران، نوع پروژه‌ها و منابع مورد نیاز (CPU/GPU/RAM/فضا)</p></div>
+      <div class="step"><h3>پیکربندی زیرساخت</h3><p>تعیین ظرفیت، بسته‌های منابع و سیاست‌های تخصیص</p></div>
+      <div class="step"><h3>اجرای پایلوت</h3><p>راه‌اندازی برای یک تیم نمونه و دریافت بازخورد</p></div>
+      <div class="step"><h3>توسعه و پشتیبانی</h3><p>تعمیم به سایر تیم‌ها، آموزش کاربران و پشتیبانی مستمر</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>زیرساخت با ما، کد با شما</h2>
+  <p>برای راه‌اندازی میزکار ابری توسعه در سازمان، دانشگاه یا تیم خود، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست دسترسی آزمایشی</a>
+    <a class="btn btn-ghost" href="#">بررسی نیاز مجموعه شما</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>ISDS CLOUD WORKBENCH</b> — میزکار ابری توسعه و محاسبات با زیرساخت GPU برای توسعه‌دهندگان، تیم‌های هوش مصنوعی و پژوهشگران
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>

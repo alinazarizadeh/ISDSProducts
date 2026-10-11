@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS AI Process Automation | اتوماسیون هوشمند فرایندهای سازمانی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+    --amber: #f59e0b;
+    --amber-dark: #d97706;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark)}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head .sec-tag{font-size:.85rem;color:var(--gray);font-weight:600;margin-inline-start:10px}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card h3 .no{
+    font-size:.65em;color:var(--lime-dark);border:1.5px solid var(--lime-mid);
+    border-radius:7px;padding:0 6px;margin-inline-start:auto;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  ul.feat li b{color:var(--ink)}
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Graphical process stepper ===== */
+  .flow-label{margin-top:22px;font-size:.82rem;font-weight:800;color:var(--lime-dark);display:flex;align-items:center;gap:8px}
+  .flow-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .pflow{display:flex;margin-top:16px}
+  .pstep{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;position:relative;text-align:center;padding:0 3px}
+  .pstep:not(:last-child)::before{
+    content:"";position:absolute;top:14.5px;right:50%;left:-50%;height:3px;z-index:0;
+    background:linear-gradient(-90deg,var(--lime-mid),var(--lime));
+  }
+  .pnum{
+    width:32px;height:32px;border-radius:50%;flex:none;z-index:1;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.8rem;font-weight:900;color:#fff;
+    background:linear-gradient(135deg,var(--lime),var(--lime-dark));
+    box-shadow:0 0 0 3px rgba(132,204,22,.15);
+  }
+  .pstep.human .pnum{
+    background:linear-gradient(135deg,var(--amber),var(--amber-dark));
+    box-shadow:0 0 0 3px rgba(245,158,11,.18);
+  }
+  .plabel{margin-top:8px;font-size:.76rem;font-weight:700;color:var(--ink);line-height:1.55}
+  .pstep.human .plabel{color:#b45309}
+
+  @media(max-width:640px){
+    .pflow{flex-direction:column}
+    .pstep{flex-direction:row;align-items:flex-start;gap:12px;text-align:right;padding:0 0 16px}
+    .pstep:last-child{padding-bottom:0}
+    .pstep:not(:last-child)::before{
+      top:32px;bottom:-16px;right:14.5px;left:auto;width:3px;height:auto;
+      background:linear-gradient(180deg,var(--lime-mid),var(--lime));
+    }
+    .plabel{margin-top:5px;font-size:.85rem}
+  }
+
+  /* ===== Stepper legend ===== */
+  .legend-mini{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}
+  .lg{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:var(--gray)}
+  .lg i{width:14px;height:14px;border-radius:50%;flex:none}
+  .lg-auto i{background:linear-gradient(135deg,var(--lime),var(--lime-dark))}
+  .lg-human i{background:linear-gradient(135deg,var(--amber),var(--amber-dark))}
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:step;margin-top:26px}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:680px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">ISDS PROCESS AUTOMATION<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#how">نحوه کار</a>
+      <a href="#patterns">الگوهای آماده</a>
+      <a href="#biz">حوزه‌های خودکارسازی</a>
+      <a href="#benefits">مزیت‌ها</a>
+      <a href="#contact">شروع همکاری</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">ISDS AI Process Automation | از فرایندهای دستی و زمان‌بر تا سازمانی هوشمند، سریع و کارآمد</span>
+  <h1><em>اتوماسیون هوشمند فرایندهای سازمانی</em><br>عامل‌های هوشمند؛ همکاران دیجیتال سازمان شما</h1>
+  <p>بسیاری از فرایندهای سازمانی به انجام فعالیت‌های تکراری، بررسی داده‌ها، هماهنگی میان واحدها و پیگیری درخواست‌ها و جابه‌جایی اطلاعات میان سامانه‌های مختلف وابسته‌اند. این راهکار با رویکرد <strong>عامل‌های هوشمند</strong>، فرایندهای پشت‌سرهم را از ابتدا تا انتها به‌صورت خودکار اجرا می‌کند.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#contact">درخواست مشاوره</a>
+    <a class="btn btn-ghost" href="#patterns">مشاهده الگوهای آماده</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p>در این راهکار، <strong>عامل‌های هوشمند</strong> مانند دستیاران دیجیتال در واحدهای مختلف سازمان فعالیت می‌کنند؛ درخواست‌ها را دریافت و تحلیل می‌کنند، اطلاعات مورد نیاز را از سامانه‌ها استخراج می‌کنند، اقدامات مشخصی انجام می‌دهند و مراحل مختلف یک فرایند را با حداقل مداخله انسانی و تحت نظارت سازمان پیش می‌برند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🤖</span>همکار دیجیتال</h3><p>عامل‌های هوشمند همیشه در دسترس، در کنار تیم‌های سازمان فعالیت و اجرای فرایندها را بر عهده می‌گیرند.</p></div>
+      <div class="card"><h3><span class="ic">👤</span>نظارت انسانی</h3><p>اقدامات حساس و تصمیم‌های مهم پیش از اجرا در اختیار مسئول مربوطه قرار می‌گیرد.</p></div>
+      <div class="card"><h3><span class="ic">🔗</span>یکپارچگی سازمانی</h3><p>اتصال به ERP، CRM، اتوماسیون اداری، منابع انسانی و سایر سامانه‌های موجود سازمان.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 HOW AGENTS WORK ================= -->
+<section id="how">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>عامل‌های هوشمند چگونه کار می‌کنند؟</h2>
+      <p>هر عامل به‌عنوان یک عضو دیجیتال از تیم، یک فرایند مشخص را از ابتدا تا انتها پیش می‌برد؛ در محدوده اختیارات تعریف‌شده تصمیم می‌گیرد و در نقاط حساس، تصمیم را به انسان واگذار می‌کند.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>دریافت رخداد یا درخواست</h3><p>از ایمیل، سامانه، فرم یا کانال ارتباطی سازمان</p></div>
+      <div class="step"><h3>تحلیل و استخراج اطلاعات</h3><p>بررسی داده‌ها و دریافت اطلاعات مورد نیاز از سامانه‌ها</p></div>
+      <div class="step"><h3>پیشنهاد اقدام</h3><p>تعیین مسیر اجرا بر اساس قواعد و شرایط سازمان</p></div>
+      <div class="step"><h3>تأیید انسانی</h3><p>در اقدامات حساس، مالی و تصمیم‌های مهم</p></div>
+      <div class="step"><h3>اجرای خودکار و پیگیری</h3><p>انجام اقدام، ثبت در سامانه‌ها و اطلاع‌رسانی به افراد مرتبط</p></div>
+    </div>
+    <div class="use-case" style="margin-top:26px"><b>نظارت و کنترل:</b> هر عامل در محدوده اختیارات تعریف‌شده عمل می‌کند؛ نقاط تأیید مدیریتی برای اقدامات حساس، مالی و تصمیم‌های مهم قابل تعریف است و تمام سوابق اقدامات ثبت و قابل بازرسی می‌ماند. در نمودار فرایندهای این کاتالوگ، <b>نقطه‌های نارنجی</b> مراحل نیازمند تأیید انسانی را نشان می‌دهند.</div>
+    <div class="legend-mini">
+      <span class="lg lg-auto"><i></i>مرحله خودکار — اجرا توسط عامل هوشمند</span>
+      <span class="lg lg-human"><i></i>نقطه تأیید انسانی — تصمیم با مسئول مربوطه</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 PATTERNS OVERVIEW ================= -->
+<section id="patterns">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>نمونه فرایندهای قابل هوشمندسازی</h2>
+      <p>ده الگوی آماده استقرار برای پرتکرارترین فرایندهای سازمانی؛ هر الگو متناسب با فرایندها و سامانه‌های موجود سازمان سفارشی‌سازی می‌شود.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">📣</span>بازاریابی هوشمند<span class="no">۰۱</span></h3><p>کمپین‌های بازاریابی از تعریف تا بهینه‌سازی مداوم</p></div>
+      <div class="card"><h3><span class="ic">🤝</span>فروش هوشمند<span class="no">۰۲</span></h3><p>از دریافت سرنخ تا نهایی‌شدن فروش و ثبت در CRM</p></div>
+      <div class="card"><h3><span class="ic">🧑‍💼</span>جذب و استخدام<span class="no">۰۳</span></h3><p>از انتشار فرصت شغلی تا تصمیم نهایی استخدام</p></div>
+      <div class="card"><h3><span class="ic">🗂️</span>دبیرخانه اداری<span class="no">۰۴</span></h3><p>منشی اداری هوشمند برای جلسات، مکاتبات و پیگیری‌ها</p></div>
+      <div class="card"><h3><span class="ic">☎️</span>مرکز تماس<span class="no">۰۵</span></h3><p>پاسخ‌گویی شبانه‌روزی تماس‌ها و پیام‌های مشتریان</p></div>
+      <div class="card"><h3><span class="ic">📦</span>خرید و تأمین<span class="no">۰۶</span></h3><p>از شناسایی نیاز به خرید تا پیگیری تحویل کالا</p></div>
+      <div class="card"><h3><span class="ic">💰</span>امور مالی<span class="no">۰۷</span></h3><p>پردازش فاکتورها، تطبیق اسناد و گردش تأیید پرداخت</p></div>
+      <div class="card"><h3><span class="ic">🎧</span>پشتیبانی مشتریان<span class="no">۰۸</span></h3><p>دریافت درخواست‌ها، پاسخ‌گویی و پیگیری تا حل مشکل</p></div>
+      <div class="card"><h3><span class="ic">📊</span>پروژه و عملیات<span class="no">۰۹</span></h3><p>پایش پیشرفت، شناسایی تأخیر و هشدار ریسک‌ها</p></div>
+      <div class="card"><h3><span class="ic">⚖️</span>قراردادها و امور حقوقی<span class="no">۱۰</span></h3><p>تحلیل قرارداد، گردش تأیید و پایش تعهدات</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 MARKETING & SALES ================= -->
+<section id="biz">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>بازاریابی و فروش هوشمند</h2>
+      <span class="sec-tag">الگوهای ۰۱ و ۰۲</span>
+      <p>زنجیره جذب مشتری — از شناخت مخاطب و تولید محتوا تا پیگیری سرنخ‌ها و نهایی‌شدن فروش — بدون وقفه و بدون جا ماندن هیچ فرصتی.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">📣</span>اتوماسیون بازاریابی<span class="no">۰۱</span></h3>
+        <ul class="feat">
+          <li>شناسایی و دسته‌بندی مخاطبان</li>
+          <li>تولید محتوای تبلیغاتی، ایمیل و پیام بازاریابی</li>
+          <li>برنامه‌ریزی و اجرای کمپین‌ها پس از تأیید مسئول مربوطه</li>
+          <li>تحلیل رفتار مشتریان و بهینه‌سازی خودکار کمپین‌ها</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">تعریف کمپین</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">تحلیل مخاطبان</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">تولید محتوا</span></div>
+          <div class="pstep human"><span class="pnum">۴</span><span class="plabel">تأیید و انتشار</span></div>
+          <div class="pstep"><span class="pnum">۵</span><span class="plabel">ارزیابی نتیجه</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">بهینه‌سازی مداوم</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🤝</span>اتوماسیون فروش<span class="no">۰۲</span></h3>
+        <ul class="feat">
+          <li>دریافت و ارزیابی سرنخ‌های فروش از کانال‌های مختلف</li>
+          <li>پاسخ‌گویی اولیه و معرفی محصولات و خدمات</li>
+          <li>پیگیری هوشمند مشتریان و هماهنگی جلسات فروش</li>
+          <li>تهیه پیشنهاد قیمت تجاری و پیش‌فاکتور</li>
+          <li>ثبت و به‌روزرسانی اطلاعات در CRM</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">دریافت سرنخ</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">ارزیابی نیاز</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">ارتباط با مشتری</span></div>
+          <div class="pstep"><span class="pnum">۴</span><span class="plabel">هماهنگی جلسه</span></div>
+          <div class="pstep human"><span class="pnum">۵</span><span class="plabel">تأیید پیشنهاد قیمت</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">پیگیری تا نهایی‌شدن فروش</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 HR & OFFICE ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>جذب و استخدام و دبیرخانه اداری</h2>
+      <span class="sec-tag">الگوهای ۰۳ و ۰۴</span>
+      <p>خودکارسازی فرایندهای پرحجم منابع انسانی و امور اداری؛ از غربال رزومه‌ها تا مدیریت جلسات و پیگیری مصوبات.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">🧑‍💼</span>اتوماسیون جذب و استخدام<span class="no">۰۳</span></h3>
+        <ul class="feat">
+          <li>دریافت و دسته‌بندی رزومه‌های متقاضیان</li>
+          <li>استخراج مهارت‌ها و مقایسه با الزامات موقعیت شغلی</li>
+          <li>هماهنگی خودکار زمان مصاحبه‌ها</li>
+          <li>طراحی و اجرای آزمون‌های اولیه و تخصصی</li>
+          <li>تهیه خلاصه ارزیابی برای کارشناس منابع انسانی</li>
+          <li>پیگیری مدارک و مراحل ورود کارکنان جدید</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">انتشار فرصت شغلی</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">دریافت رزومه</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">بررسی و غربال اولیه</span></div>
+          <div class="pstep"><span class="pnum">۴</span><span class="plabel">آزمون و مصاحبه</span></div>
+          <div class="pstep human"><span class="pnum">۵</span><span class="plabel">تصمیم نهایی مسئول استخدام</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">ورود و onboardinگ نیروی جدید</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🗂️</span>دبیرخانه و منشی اداری هوشمند<span class="no">۰۴</span></h3>
+        <ul class="feat">
+          <li>پاسخ‌گویی به تماس‌ها، پیام‌ها و درخواست‌های اداری</li>
+          <li>تنظیم جلسات و مدیریت تقویم مدیران</li>
+          <li>تماس با کارکنان، ثبت نکات و ارجاع</li>
+          <li>ثبت و پیگیری مکاتبات و درخواست‌ها</li>
+          <li>تهیه صورت‌جلسه و استخراج وظایف و مصوبات</li>
+          <li>یادآوری جلسات، تعهدات و اقدامات معوق</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">دریافت درخواست جلسه</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">بررسی تقویم</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">هماهنگی افراد</span></div>
+          <div class="pstep"><span class="pnum">۴</span><span class="plabel">ثبت جلسه</span></div>
+          <div class="pstep"><span class="pnum">۵</span><span class="plabel">ارسال یادآوری</span></div>
+          <div class="pstep human"><span class="pnum">۶</span><span class="plabel">تأیید مصوبات توسط مدیر</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 CONTACT & SUPPORT ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۶</span><h2>مرکز تماس و پشتیبانی مشتریان</h2>
+      <span class="sec-tag">الگوهای ۰۵ و ۰۸</span>
+      <p>ارائه خدمات مشتریان به‌صورت شبانه‌روزی؛ پاسخ‌گویی هوشمند به تماس‌ها و پیام‌ها، ثبت درخواست‌ها و پیگیری تا حل نهایی.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">☎️</span>مرکز تماس هوشمند<span class="no">۰۵</span></h3>
+        <ul class="feat">
+          <li>پاسخ‌گویی خودکار به تماس‌ها و پیام‌ها به‌صورت شبانه‌روزی</li>
+          <li>گفتگوی صوتی هوشمند با مشتریان</li>
+          <li>شناسایی موضوع تماس و بازیابی اطلاعات مرتبط</li>
+          <li>ثبت درخواست‌ها و پیگیری تا انجام خدمات</li>
+          <li>ارائه اطلاعات و پاسخ‌های به‌روز</li>
+          <li>تحلیل تماس‌ها و شناسایی مشکلات پرتکرار</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">دریافت تماس</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">تشخیص نیاز مشتری</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">بررسی سامانه‌ها</span></div>
+          <div class="pstep"><span class="pnum">۴</span><span class="plabel">پاسخ هوشمند یا ثبت درخواست</span></div>
+          <div class="pstep human"><span class="pnum">۵</span><span class="plabel">ارجاع به کارشناس در صورت نیاز</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">پیگیری تا انجام خدمت</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎧</span>اتوماسیون پشتیبانی مشتریان<span class="no">۰۸</span></h3>
+        <ul class="feat">
+          <li>دریافت و دسته‌بندی درخواست‌ها و شکایات</li>
+          <li>پاسخ‌گویی بر اساس پایگاه دانش سازمان</li>
+          <li>ثبت خودکار در سامانه و ارجاع به واحد مربوط</li>
+          <li>پیگیری زمان پاسخ‌گویی و تعهدات خدمات (SLA)</li>
+          <li>اطلاع‌رسانی وضعیت درخواست تا زمان حل مسئله</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">دریافت شکایت</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">تشخیص موضوع</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">بررسی سوابق</span></div>
+          <div class="pstep"><span class="pnum">۴</span><span class="plabel">پیشنهاد راهکار</span></div>
+          <div class="pstep human"><span class="pnum">۵</span><span class="plabel">ارجاع به کارشناس</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">پیگیری تا حل مشکل</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 PROCUREMENT & FINANCE ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۷</span><h2>خرید و تأمین و امور مالی</h2>
+      <span class="sec-tag">الگوهای ۰۶ و ۰۷</span>
+      <p>خودکارسازی چرخه تأمین و مالی؛ از شناسایی نیاز به خرید و پردازش فاکتورها تا تأیید، ثبت و پیگیری تا تحویل و پرداخت.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">📦</span>اتوماسیون خرید و تأمین کالا<span class="no">۰۶</span></h3>
+        <ul class="feat">
+          <li>پایش موجودی انبار و شناسایی نیاز به خرید</li>
+          <li>تهیه درخواست خرید بر اساس قواعد سازمان</li>
+          <li>جمع‌آوری و مقایسه پیشنهادهای تأمین‌کنندگان</li>
+          <li>ارسال درخواست خرید برای تأیید مدیر مربوطه</li>
+          <li>صدور سفارش پس از تأیید و پیگیری تأمین کالا</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">شناسایی کمبود موجودی</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">بررسی تأمین‌کنندگان</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">مقایسه قیمت‌ها</span></div>
+          <div class="pstep human"><span class="pnum">۴</span><span class="plabel">تأیید خرید توسط مدیر</span></div>
+          <div class="pstep"><span class="pnum">۵</span><span class="plabel">ثبت سفارش</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">پیگیری تحویل</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">💰</span>اتوماسیون فرایندهای مالی<span class="no">۰۷</span></h3>
+        <ul class="feat">
+          <li>دریافت و پردازش فاکتورها و اسناد مالی</li>
+          <li>استخراج و تطبیق اطلاعات با قراردادها و سفارش‌ها</li>
+          <li>شناسایی مغایرت‌ها و تراکنش‌های غیرعادی</li>
+          <li>آماده‌سازی درخواست پرداخت و گردش تأییدات</li>
+          <li>ثبت اطلاعات تأییدشده در سامانه‌های مالی</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">دریافت فاکتور</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">استخراج اطلاعات</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">تطبیق با سفارش</span></div>
+          <div class="pstep"><span class="pnum">۴</span><span class="plabel">شناسایی مغایرت</span></div>
+          <div class="pstep human"><span class="pnum">۵</span><span class="plabel">تأیید مسئول مالی</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">ثبت و پیگیری پرداخت</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 PROJECT & LEGAL ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۸</span><h2>مدیریت پروژه و امور حقوقی</h2>
+      <span class="sec-tag">الگوهای ۰۹ و ۱۰</span>
+      <p>پایش مستمر پروژه‌ها و مدیریت چرخه قراردادها؛ شناسایی به‌موقع تأخیرها، تعهدات و ریسک‌ها پیش از تبدیل‌شدن به مشکل.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">📊</span>اتوماسیون مدیریت پروژه و عملیات<span class="no">۰۹</span></h3>
+        <ul class="feat">
+          <li>دریافت وضعیت وظایف و فعالیت‌های پروژه</li>
+          <li>شناسایی تأخیرها، وابستگی‌ها و گلوگاه‌ها</li>
+          <li>یادآوری و پیگیری هوشمند اقدامات از مسئولان</li>
+          <li>ثبت و به‌روزرسانی وضعیت در سامانه مدیریت پروژه</li>
+          <li>تهیه گزارش پیشرفت و هشدار ریسک‌های عملیاتی</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">پایش فعالیت‌ها</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">شناسایی تأخیر</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">پیگیری مسئول</span></div>
+          <div class="pstep"><span class="pnum">۴</span><span class="plabel">ثبت وضعیت جدید</span></div>
+          <div class="pstep human"><span class="pnum">۵</span><span class="plabel">ارجاع ریسک به مدیر پروژه</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">⚖️</span>اتوماسیون قراردادها و امور حقوقی<span class="no">۱۰</span></h3>
+        <ul class="feat">
+          <li>دریافت و دسته‌بندی قراردادها و مکاتبات حقوقی</li>
+          <li>استخراج تعهدات، مهلت‌ها و شرایط قرارداد</li>
+          <li>بررسی مغایرت‌ها با آیین‌نامه‌های سازمانی</li>
+          <li>گردش تأیید قرارداد میان واحدهای حقوقی، مالی و مدیریت</li>
+          <li>یادآوری سررسید تعهدات و تمدید قراردادها</li>
+        </ul>
+        <div class="flow-label">نمونه فرایند</div>
+        <div class="pflow">
+          <div class="pstep"><span class="pnum">۱</span><span class="plabel">دریافت پیش‌نویس قرارداد</span></div>
+          <div class="pstep"><span class="pnum">۲</span><span class="plabel">تحلیل مفاد</span></div>
+          <div class="pstep"><span class="pnum">۳</span><span class="plabel">بررسی مغایرت‌ها</span></div>
+          <div class="pstep human"><span class="pnum">۴</span><span class="plabel">تأیید واحدهای ذی‌ربط</span></div>
+          <div class="pstep"><span class="pnum">۵</span><span class="plabel">ثبت قرارداد</span></div>
+          <div class="pstep"><span class="pnum">۶</span><span class="plabel">پایش تعهدات</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9 KEY BENEFITS ================= -->
+<section id="benefits">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۹</span><h2>قابلیت‌ها و مزیت‌های کلیدی</h2>
+      <p>ارزش‌های اصلی اتوماسیون هوشمند فرایندها برای سازمان.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌های راهکار</h3>
+        <ul class="feat">
+          <li><b>اتوماسیون چندمرحله‌ای:</b> اجرای زنجیره‌ای از وظایف توسط یک یا چند عامل هوشمند</li>
+          <li><b>یکپارچگی سازمانی:</b> اتصال به ERP، CRM، اتوماسیون اداری، منابع انسانی و سایر سامانه‌ها</li>
+          <li><b>فعالیت ۲۴ ساعته:</b> ارائه خدمات و اجرای فرایندها بدون محدودیت ساعت اداری</li>
+          <li><b>تصمیم‌گیری هوشمند:</b> تحلیل اطلاعات، تشخیص شرایط و انتخاب مسیر مناسب در محدوده اختیارات تعریف‌شده</li>
+          <li><b>نظارت انسانی:</b> امکان تعریف نقاط تأیید مدیریتی برای اقدامات حساس، مالی و تصمیم‌های مهم</li>
+          <li><b>امنیت و کنترل:</b> مدیریت سطح دسترسی، ثبت سوابق اقدامات و امکان استقرار در زیرساخت داخلی سازمان</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">📈</span>مزیت برای سازمان</h3>
+        <div class="tags" style="margin-top:8px">
+          <span class="tag">⏱️ کاهش زمان اجرای فرایندها</span>
+          <span class="tag">🎯 کاهش خطاهای دستی</span>
+          <span class="tag">💸 کاهش هزینه‌های عملیاتی</span>
+          <span class="tag">🔁 اجرای پیوسته بدون وقفه</span>
+          <span class="tag">👀 شفافیت و قابلیت بازرسی</span>
+          <span class="tag">🚀 تمرکز تیم‌ها بر کارهای ارزش‌آفرین</span>
+        </div>
+        <div class="use-case"><b>تفاوت با خودکارسازی سنتی:</b> عامل‌های هوشمند فقط دستور اجرا نمی‌گیرند؛ وضعیت را درک می‌کنند، شرایط متغیر را تحلیل می‌کنند و مسیر فرایند را متناسب با هر درخواست تنظیم می‌کنند.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 ADOPTION / CTA ================= -->
+<section id="contact" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۰</span><h2>راهکار اختصاصی برای هر سازمان</h2>
+      <p>راهکارهای اتوماسیون هوشمند <strong>ISDS</strong> متناسب با ساختار، نیازها و فرایندهای هر سازمان طراحی و توسعه می‌یابند. سازمان‌ها می‌توانند از هوشمندسازی <strong>یک فعالیت مشخص</strong> شروع کرده و به‌تدریج، فرایندهای پیچیده و بین‌واحدی خود را هوشمندسازی کنند.</p>
+      <p>این راهکار با بهره‌گیری از زیرساخت <strong>ISDS AI Factory</strong> و قابلیت‌های <strong>AI Agent</strong> و <strong>Workflow Automation</strong>، اتصال به سامانه‌های سازمانی را ممکن می‌سازد.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>شناسایی فرایند پایلوت</h3><p>انتخاب یک فرایند پرتکرار و پرحجم برای شروع هوشمندسازی</p></div>
+      <div class="step"><h3>طراحی عامل و قواعد</h3><p>تعریف مراحل، اختیارات و قواعد تصمیم‌گیری متناسب با سازمان</p></div>
+      <div class="step"><h3>تعریف نقاط تأیید</h3><p>تعیین اقدامات نیازمند تأیید انسانی و سطوح دسترسی</p></div>
+      <div class="step"><h3>استقرار و پایش</h3><p>راه‌اندازی، اتصال به سامانه‌ها و پایش نتایج اجرا</p></div>
+      <div class="step"><h3>توسعه تدریجی</h3><p>هوشمندسازی فرایندهای بعدی و بین‌واحدی بر اساس نتایج</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>سازمانی که نه‌تنها هوشمندانه تصمیم می‌گیرد، بلکه هوشمندانه عمل می‌کند</h2>
+  <p>برای شناسایی فرایندهای قابل خودکارسازی در سازمان خود و طراحی راهکار اختصاصی، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست مشاوره</a>
+    <a class="btn btn-ghost" href="#">شناسایی فرایندهای قابل خودکارسازی</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>ISDS AI PROCESS AUTOMATION</b> — اتوماسیون هوشمند فرایندهای سازمانی با عامل‌های هوشمند
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS CEO AI Assistant | دستیار هوشمند مدیرعامل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark)}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card h3 .no{
+    font-size:.65em;color:var(--lime-dark);border:1.5px solid var(--lime-mid);
+    border-radius:7px;padding:0 6px;margin-inline-start:auto;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  ul.feat li b{color:var(--ink)}
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Chat bubbles ===== */
+  .chat{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+  .bubble{
+    align-self:flex-start;max-width:88%;
+    background:linear-gradient(180deg,#fbfef5,#f4fbe9);
+    border:1px solid var(--lime-mid);
+    border-radius:4px 18px 18px 18px;
+    padding:12px 20px;font-size:.97rem;font-weight:600;color:var(--ink);
+    box-shadow:0 4px 14px rgba(132,204,22,.1);
+  }
+  .bubble small{display:block;font-weight:400;color:var(--gray);font-size:.8rem;margin-top:2px}
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:step;margin-top:26px}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:640px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">ISDS CEO AI<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#features">قابلیت‌های کلیدی</a>
+      <a href="#samples">نمونه تعامل</a>
+      <a href="#benefits">مزیت‌ها</a>
+      <a href="#security">امنیت و استقرار</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">ISDS CEO AI Assistant | سازمان شما، همیشه در دسترس شما</span>
+  <h1><em>دستیار هوشمند مدیرعامل</em><br>از مشاهده و تحلیل تا اقدام و پیگیری هوشمند</h1>
+  <p>راهکاری مبتنی بر هوش مصنوعی که به مدیران ارشد امکان می‌دهد در هر ساعت از شبانه‌روز و از هر مکانی، وضعیت سازمان را بررسی کنند، تصمیمات مدیریتی اتخاذ کنند و اقدامات اجرایی را پیگیری نمایند.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#security">درخواست نمایش قابلیت‌ها</a>
+    <a class="btn btn-ghost" href="#features">مشاهده کاتالوگ</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p><strong>دستیار هوشمند مدیرعامل ISDS</strong> با اتصال به سامانه‌ها، پایگاه‌های داده و فرایندهای سازمانی، نقش یک <strong>همراه هوشمند مدیریتی</strong> را ایفا می‌کند که علاوه بر ارائه اطلاعات و تحلیل، در شناسایی مسائل، پیشگیری از مشکلات، پیشنهاد راهکار و اجرای فرایندهای مدیریتی نیز به مدیرعامل کمک می‌کند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🕑</span>همیشه در دسترس</h3><p>در هر ساعت از شبانه‌روز و از هر مکانی، در جریان فعالیت‌های سازمان باشید.</p></div>
+      <div class="card"><h3><span class="ic">🧠</span>همراه تحلیلی</h3><p>تحلیل، دستورالعمل‌ها و گزارش‌های مدیریتی از اطلاعات واقعی سازمان.</p></div>
+      <div class="card"><h3><span class="ic">⚡</span>اجرا و پیگیری</h3><p>ثبت دستورات، پیگیری خودکار مصوبات و ارجاع به واحدهای مربوطه.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 KEY FEATURES ================= -->
+<section id="features">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>قابلیت‌های کلیدی</h2>
+      <p>پنج حوزه اصلی قابلیت، چرخه کامل مدیریت سازمان — از پایش تا پیگیری — را پوشش می‌دهند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">📡</span>پایش و مدیریت یکپارچه سازمان<span class="no">۰۱</span></h3>
+        <ul class="feat">
+          <li>نظارت <b>۲۴ ساعته</b> بر وضعیت واحدها، شعب و فعالیت‌های سازمان</li>
+          <li>پایش شاخص‌های کلیدی عملکرد، اهداف و برنامه‌ها</li>
+          <li>شناسایی مشکلات، ریسک‌ها و انحرافات عملکردی</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">💰</span>مدیریت مالی، فروش و منابع سازمان<span class="no">۰۲</span></h3>
+        <ul class="feat">
+          <li>بررسی وضعیت درآمد، هزینه‌ها، نقدینگی و مطالبات</li>
+          <li>مشاهده موجودی کالا، وضعیت بار و زنجیره تأمین</li>
+          <li>پایش فروش، مشتریان و عملکرد شعب</li>
+          <li>بررسی وضعیت منابع انسانی و بهره‌وری کارکنان</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">💬</span>ارتباط هوشمند با سازمان<span class="no">۰۳</span></h3>
+        <ul class="feat">
+          <li>گفت‌وگو به <b>زبان فارسی</b> و دریافت پاسخ از اطلاعات واقعی سازمان</li>
+          <li>جستجوی هوشمند در اسناد، مکاتبات و داده‌های سازمانی</li>
+          <li>دریافت تحلیل، دستورالعمل‌ها و گزارش‌های مدیریتی</li>
+          <li>دسترسی به اطلاعات به‌روز، بدون مراجعه به سامانه‌های متعدد</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🔮</span>تصمیم‌یاری و تحلیل پیش‌بینانه<span class="no">۰۴</span></h3>
+        <ul class="feat">
+          <li>تحلیل روندها و <b>پیش‌بینی وضعیت آینده</b> کسب‌وکار</li>
+          <li>شناسایی فرصت‌ها، تهدیدها و گلوگاه‌های عملیاتی</li>
+          <li>ارائه پیشنهادهای هوشمند برای بهبود عملکرد</li>
+          <li>مقایسه سناریوهای مدیریتی و ارزیابی پیامدهای تصمیمات</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">✅</span>اتوماسیون و پیگیری اقدامات مدیریتی<span class="no">۰۵</span></h3>
+        <ul class="feat">
+          <li>ثبت و ارجاع دستورات مدیرعامل به واحدهای مربوطه</li>
+          <li>پیگیری خودکار وظایف، مصوبات و تصمیمات</li>
+          <li>یادآوری تعهدات، جلسات و اقدامات مهم</li>
+          <li>اجرای اقدامات مجاز در سامانه‌های سازمان با تأیید مدیر مسئول</li>
+          <li>ارسال هشدارهای هوشمند در شرایط بحرانی یا غیرعادی</li>
+        </ul>
+      </div>
+      <div class="card" style="background:linear-gradient(180deg,#fbfef5,#fff)">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>مدیرعامل به‌جای مرور چند سامانه و گزارش پراکنده، وضعیت کل سازمان را در یک گفتگو مشاهده می‌کند و اقدامات لازم را در همان محیط تعریف و پیگیری می‌نماید.</p>
+        <div class="use-case"><b>مثال:</b> بررسی روزانه وضعیت فروش شعب، اطلاع از انحراف شاخص‌ها و صدور دستور پیگیری — همه در یک گفتگوی کوتاه.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 SAMPLE INTERACTIONS ================= -->
+<section id="samples">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>نمونه تعامل با دستیار</h2>
+      <p>سؤال به زبان طبیعی فارسی؛ پاسخ از داده‌های واقعی سازمان.</p>
+    </div>
+    <div class="chat">
+      <div class="bubble">«الان وضعیت کلی سازمان چطوره و چه مشکلات مهمی داریم؟»<small>تحلیل یکپارچه وضعیت واحدها و شناسایی موارد نیازمند توجه</small></div>
+      <div class="bubble">«موجودی کالای X چقدره و تا چند روز جوابگو هست؟»<small>استعلام لحظه‌ای از سامانه انبارداری و زنجیره تأمین</small></div>
+      <div class="bubble">«کدوم شعب عملکرد ضعیفی داشتن و دلایلش چی بوده؟»<small>مقایسه عملکرد شعب و تحلیل ریشه انحرافات</small></div>
+      <div class="bubble">«بدهی‌های تأخیردار رو مشخص کن و از مسئولان پیگیری کن.»<small>شناسایی مطالبات معوق و تعریف وظیفه پیگیری</small></div>
+      <div class="bubble">«برای کاهش هزینه‌های عملیاتی چه پیشنهادهایی داری؟»<small>تحلیل الگوی هزینه‌ها و ارائه پیشنهادهای بهبود</small></div>
+      <div class="bubble">«وضعیت اجرای مصوبات جلسه هفته گذشته چیه؟»<small>گزارش پیشرفت مصوبات و وظایف در جریان</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 KEY BENEFITS ================= -->
+<section id="benefits">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>مزیت‌های کلیدی</h2>
+      <p>ارزش‌های اصلی استفاده از دستیار هوشمند مدیرعامل در عملیات روزانه سازمان.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">🕑 مدیریت بدون محدودیت زمان و مکان</span>
+      <span class="tag">⚡ تصمیم‌گیری سریع و داده‌محور</span>
+      <span class="tag">🔁 کاهش فعالیت‌های تکراری</span>
+      <span class="tag">📈 افزایش بهره‌وری مدیریتی</span>
+      <span class="tag">🛡️ شناسایی پیش‌گیرانه مشکلات</span>
+      <span class="tag">🗂️ کنترل و نظارت یکپارچه سازمان</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 INTEGRATION & SECURITY ================= -->
+<section id="security" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>یکپارچگی و امنیت سازمانی</h2>
+      <p>دستیار هوشمند مدیرعامل قابلیت اتصال به سامانه‌های <strong>ERP، CRM، مالی، منابع انسانی، انبارداری و مدیریت پروژه</strong> را دارد و متناسب با الزامات امنیتی هر سازمان، بر بستر <strong>ISDS AI Factory</strong> در زیرساخت داخلی سازمان (On-Premise) توسعه و مستقر می‌شود. قابلیت‌های عملیاتی متناسب با نیاز سازمان، با دسترسی به داده‌ها و سامانه‌های موجود، سفارشی‌سازی و پیاده‌سازی می‌شوند.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>اتصال به سامانه‌ها</h3><p>برقراری اتصال به ERP، CRM، مالی و سایر منابع داده سازمان.</p></div>
+      <div class="step"><h3>تنظیم امنیت و دسترسی</h3><p>تعریف سطوح دسترسی و اعمال الزامات امنیتی سازمان.</p></div>
+      <div class="step"><h3>سفارشی‌سازی قابلیت‌ها</h3><p>تنظیم قابلیت‌های عملیاتی متناسب با نیاز و فرایندهای سازمان.</p></div>
+      <div class="step"><h3>استقرار داخلی</h3><p>توسعه و استقرار روی زیرساخت داخلی سازمان بر بستر AI Factory.</p></div>
+    </div>
+    <div class="use-case" style="margin-top:26px"><b>دامنه اقدامات:</b> دامنه اقدامات اجرایی دستیار (مانند ثبت دستور یا ارجاع وظیفه) با تأیید مدیر مسئول و مطابق سیاست‌های دسترسی هر سازمان تعیین می‌شود.</div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>سازمان شما، همیشه در دسترس شما</h2>
+  <p>برای مشاهده قابلیت‌ها و بررسی کاربرد دستیار هوشمند مدیرعامل در سازمان خود، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست دمو</a>
+    <a class="btn btn-ghost" href="#">بررسی سناریوی سازمانی</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>ISDS CEO AI ASSISTANT</b> — دستیار هوشمند مدیرعامل؛ از مشاهده و تحلیل وضعیت سازمان تا تصمیم‌گیری، اقدام و پیگیری هوشمند.
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>

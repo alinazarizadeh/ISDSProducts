@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS AI Student Assistant | دستیار هوشمند دانش‌آموزان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark)}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card h3 .no{
+    font-size:.65em;color:var(--lime-dark);border:1.5px solid var(--lime-mid);
+    border-radius:7px;padding:0 6px;margin-inline-start:auto;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  ul.feat li b{color:var(--ink)}
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Chat bubbles ===== */
+  .chat{display:flex;flex-direction:column;gap:12px}
+  .bubble{
+    align-self:flex-start;max-width:88%;
+    background:linear-gradient(180deg,#fbfef5,#f4fbe9);
+    border:1px solid var(--lime-mid);
+    border-radius:4px 18px 18px 18px;
+    padding:12px 20px;font-size:.97rem;font-weight:600;color:var(--ink);
+    box-shadow:0 4px 14px rgba(132,204,22,.1);
+  }
+  .bubble small{display:block;font-weight:400;color:var(--gray);font-size:.8rem;margin-top:2px}
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:step;margin-top:26px}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:640px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">ISDS AI STUDENT<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#features">قابلیت‌ها</a>
+      <a href="#samples">نمونه تعامل</a>
+      <a href="#benefits">مزیت‌ها</a>
+      <a href="#trust">اعتماد و استقرار</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">ISDS AI Student Assistant | یک معلم خصوصی هوشمند، همیشه همراه دانش‌آموز</span>
+  <h1><em>دستیار هوشمند دانش‌آموزان</em><br>آموزش شخصی‌سازی‌شده، در هر ساعت از شبانه‌روز</h1>
+  <p>راهکاری آموزشی مبتنی بر هوش مصنوعی با هدف شخصی‌سازی یادگیری، تقویت مهارت‌ها و بهبود عملکرد تحصیلی دانش‌آموزان؛ بدون محدودیت زمان و مکان و متناسب با سطح هر دانش‌آموز.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#trust">درخواست نمایش قابلیت‌ها</a>
+    <a class="btn btn-ghost" href="#features">مشاهده کاتالوگ</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p><strong>دستیار هوشمند دانش‌آموزان ISDS</strong> بدون محدودیت زمان و مکان، در کنار دانش‌آموزان با مقاطع تحصیلی مختلف قرار می‌گیرد؛ متناسب با سن، پایه تحصیلی، سطح دانش و سرعت یادگیری هر دانش‌آموز رفتار می‌کند، به سؤالات پاسخ می‌دهد، مفاهیم درسی را آموزش می‌دهد، تمرین طراحی می‌کند و مسیر یادگیری اختصاصی ارائه می‌دهد. همچنین والدین می‌توانند از طریق پنل اختصاصی، روند پیشرفت تحصیلی، نقاط قوت و ضعف و میزان فعالیت آموزشی فرزند خود را مشاهده و پیگیری کنند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🧑‍🏫</span>معلم همیشه در دسترس</h3><p>پاسخ به سؤالات، آموزش مفاهیم و رفع اشکال در هر ساعت از شبانه‌روز.</p></div>
+      <div class="card"><h3><span class="ic">🎯</span>مسیر یادگیری اختصاصی</h3><p>برنامه مطالعاتی و تمرین متناسب با سطح، توانایی و اهداف هر دانش‌آموز.</p></div>
+      <div class="card"><h3><span class="ic">👨‍👩‍👧</span>همراهی والدین</h3><p>پنل اختصاصی برای مشاهده پیشرفت تحصیلی و حمایت آگاهانه از فرزند.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 FEATURES OVERVIEW ================= -->
+<section id="features">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>قابلیت‌های کلیدی محصول</h2>
+      <p>شش قابلیت اصلی، مسیر کامل یادگیری — از آموزش و تمرین تا پایش و همراهی والدین — را پوشش می‌دهند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🕑</span>معلم خصوصی هوشمند ۲۴ ساعته<span class="no">۰۱</span></h3><p>پاسخ‌گویی، آموزش گام‌به‌گام و رفع اشکال نامحدود در تمامی مقاطع.</p></div>
+      <div class="card"><h3><span class="ic">🧭</span>یادگیری شخصی‌سازی‌شده<span class="no">۰۲</span></h3><p>ارزیابی سطح، برنامه مطالعاتی اختصاصی و مرور هوشمند مباحث ضعیف.</p></div>
+      <div class="card"><h3><span class="ic">📝</span>آزمون‌سازی و آمادگی امتحانات<span class="no">۰۳</span></h3><p>طراحی آزمون، شبیه‌سازی امتحانات و کنکور و تحلیل عملکرد.</p></div>
+      <div class="card"><h3><span class="ic">🚀</span>مهارت‌های فراتر از مدرسه<span class="no">۰۴</span></h3><p>زبان انگلیسی، تفکر الگوریتمی، هوش مصنوعی و مهارت‌های حل مسئله.</p></div>
+      <div class="card"><h3><span class="ic">👨‍👩‍👧</span>پایش هوشمند و همراهی والدین<span class="no">۰۵</span></h3><p>مشاهده روند رشد علمی و دریافت پیشنهادهای حمایتی.</p></div>
+      <div class="card"><h3><span class="ic">🎮</span>یادگیری تعاملی و جذاب<span class="no">۰۶</span></h3><p>آموزش چندرسانه‌ای، چالش و امتیازدهی برای ایجاد انگیزه.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 CAP 01 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>معلم خصوصی هوشمند ۲۴ ساعته</h2>
+      <p>دستیار در هر ساعت از شبانه‌روز و از هر مکانی در کنار دانش‌آموز است؛ مثل یک معلم خصوصی که همیشه آماده پاسخ‌گویی و آموزش است.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>پاسخ‌گویی به سؤالات درسی در <b>تمامی مقاطع تحصیلی</b></li>
+          <li>آموزش مفاهیم با توضیحات <b>ساده، گام‌به‌گام و قابل فهم</b></li>
+          <li>راهنمایی در حل تمرین‌ها و تکالیف، <b>به‌جای ارائه صرف پاسخ نهایی</b></li>
+          <li>پرسش و پاسخ تعاملی و <b>رفع اشکال نامحدود</b> در موضوعات درسی</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>هر جا که دانش‌آموز سؤال یا اشکالی دارد، بدون نوبت و بدون محدودیت.</p>
+        <div class="use-case"><b>مثال:</b> دانش‌آموز ساعت ۱۰ شب هنگام مرور درس به اشکال برمی‌خورد؛ به‌جای انتقال سؤال به فردا، همان لحظه مفهوم را گام‌به‌گام یاد می‌گیرد.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 CAP 02 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>یادگیری شخصی‌سازی‌شده</h2>
+      <p>هیچ دو دانش‌آموزی یکسان یاد نمی‌گیرند. دستیار سطح علمی هر دانش‌آموز را ارزیابی می‌کند و مسیر یادگیری را بر اساس توانایی، اهداف و عملکرد او تنظیم می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>ارزیابی سطح علمی و شناسایی <b>نقاط قوت و ضعف</b> دانش‌آموز</li>
+          <li>ارائه برنامه مطالعاتی متناسب با <b>توانایی و اهداف فرد</b></li>
+          <li>تنظیم <b>سطح دشواری</b> آموزش‌ها و تمرین‌ها بر اساس عملکرد</li>
+          <li><b>مرور هوشمند</b> مطالب و تثبیت مباحثی که دانش‌آموز در آنها ضعف دارد</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>جایگزینی برنامه یکسان برای همه با مسیری که به اندازه خود دانش‌آموز چالش ایجاد می‌کند.</p>
+        <div class="use-case"><b>مثال:</b> اگر دانش‌آموز در مبحث کسور ضعف داشته باشد، دستیار تمرین‌های بیشتری از همان مبحث طراحی می‌کند و سطح دشواری را به‌تدریج بالا می‌برد.</div>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>ارزیابی سطح</h3><p>سنجش وضعیت فعلی و شناسایی نقاط قوت و ضعف</p></div>
+      <div class="step"><h3>طراحی برنامه</h3><p>برنامه مطالعاتی متناسب با اهداف و توانایی فرد</p></div>
+      <div class="step"><h3>تمرین تطبیقی</h3><p>تنظیم سطح دشواری بر اساس عملکرد در هر مرحله</p></div>
+      <div class="step"><h3>مرور هوشمند</h3><p>تکرار و تثبیت مباحث ضعیف در زمان مناسب</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 CAP 03 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>آزمون‌سازی و آمادگی امتحانات و کنکور</h2>
+      <p>از یک آزمون کلاسی تا شبیه‌سازی کنکور؛ دستیار آزمون طراحی می‌کند، پاسخ‌ها را تحلیل می‌کند و برنامه رفع اشکال ارائه می‌دهد.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>طراحی خودکار سؤالات <b>تشریحی و چهارگزینه‌ای</b></li>
+          <li>برگزاری آزمون‌های تمرینی و <b>شبیه‌سازی امتحانات و کنکور</b></li>
+          <li><b>تحلیل پاسخ‌ها و عملکرد</b> دانش‌آموز در هر آزمون</li>
+          <li>شناسایی مباحث نیازمند تمرین بیشتر و ارائه <b>برنامه رفع اشکال</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>آمادگی هدفمند برای امتحانات نهایی و کنکور، با تمرکز روی نقطه‌ضعف‌ها.</p>
+        <div class="use-case"><b>مثال:</b> پس از هر آزمون آزمایشی، گزارش تحلیلی نشان می‌دهد در کدام مباحث زمان زیادی صرف شده و کدام مباحث نیازمند مرور است.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 CAP 04 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۶</span><h2>آموزش مهارت‌های فراتر از مدرسه</h2>
+      <p>یادگیری فقط به کتاب درسی محدود نمی‌شود؛ دستیار مهارت‌هایی را آموزش می‌دهد که برای آینده تحصیلی و شغلی دانش‌آموز اهمیت دارند و متناسب با سن و علاقه او هستند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>آموزش <b>زبان انگلیسی</b>: مکالمه، گرامر و واژگان</li>
+          <li>آشنایی با مهارت‌های پایه، <b>تفکر الگوریتمی</b> و مهارت‌های کلیدی</li>
+          <li>آشنایی با <b>هوش مصنوعی</b> و تقویت تفکر انتقادی و نوآوری</li>
+          <li>توسعه مهارت‌های <b>حل مسئله، تفکر منطقی و خلاقیت</b></li>
+          <li>آموزش مهارت‌های جدید <b>متناسب با سن و علاقه</b> دانش‌آموز</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>سرمایه‌گذاری روی مهارت‌های آینده، در کنار دروس مدرسه.</p>
+        <div class="use-case"><b>مثال:</b> دانش‌آموزی که به رایانه علاقه دارد، علاوه بر دروس مدرسه، اصول تفکر الگوریتمی و مفاهیم پایه هوش مصنوعی را با مثال‌های ساده و تعاملی یاد می‌گیرد.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 CAP 05 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۷</span><h2>پایش هوشمند و همراهی والدین</h2>
+      <p>والدین از طریق پنل اختصاصی، در جریان روند یادگیری فرزند خود قرار می‌گیرند و با راهنمایی‌های کاربردی، نقش مؤثری در مسیر تحصیلی او ایفا می‌کنند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>مشاهده <b>روند رشد علمی</b> و پیشرفت تحصیلی فرزندان</li>
+          <li>بررسی <b>میزان مطالعه، فعالیت‌ها و نتایج آزمون‌ها</b></li>
+          <li>شناسایی نقاط قوت و ضعف برای ارائه راهنمایی بهتر</li>
+          <li>دریافت <b>پیشنهادهای کاربردی</b> برای حمایت آموزشی از فرزند</li>
+          <li>تعیین اهداف آموزشی و <b>پیگیری تحقق آنها</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>حضور آگاهانه والدین در مسیر تحصیل، بدون سؤال‌های مکرر و بدون فشار.</p>
+        <div class="use-case"><b>مثال:</b> پنل والدین نشان می‌دهد دانش‌آموز این هفته کمتر مطالعه کرده و در ریاضی افت داشته؛ سامانه پیشنهاد مشخصی برای بازگشت به روند ارائه می‌دهد.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 CAP 06 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۸</span><h2>یادگیری تعاملی و جذاب</h2>
+      <p>یادگیری مؤثر زمانی ماندگار است که جذاب باشد. دستیار با محتوای متنوع، چالش‌های هدفمند و عناصر انگیزشی، یادگیری مستقل را به تجربه‌ای لذت‌بخش تبدیل می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>آموزش از طریق <b>گفتگو، تصویر، مثال و محتوای چندرسانه‌ای</b></li>
+          <li>طراحی تمرین‌ها و چالش‌های آموزشی <b>متناسب با سطح</b> دانش‌آموز</li>
+          <li>ایجاد انگیزه با <b>امتیازدهی، تشویق و تعیین اهداف یادگیری</b></li>
+          <li>امکان یادگیری مستقل و تمرین بیشتر در <b>هر ساعت از شبانه‌روز</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>تبدیل مطالعه از تکلیفی اجباری به تجربه‌ای فعال و انگیزشی.</p>
+        <div class="use-case"><b>مثال:</b> به‌جای مرور خشک کتاب، دانش‌آموز با چالش‌های امتیازدار و اهداف هفتگی، برای پیشرفت خود انگیزه شخصی پیدا می‌کند.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9 SAMPLES ================= -->
+<section id="samples">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۹</span><h2>نمونه تعامل با دستیار</h2>
+      <p>گفتگو به زبان طبیعی؛ پاسخ متناسب با سن و پایه تحصیلی هر دانش‌آموز.</p>
+    </div>
+    <div class="chat">
+      <div class="bubble">«من کلاس هشتم هستم، معادلات ریاضی رو ساده توضیح بده.»<small>آموزش گام‌به‌گام متناسب با پایه تحصیلی</small></div>
+      <div class="bubble">«از فصل سوم علوم برام ۱۰ سوال امتحانی طراحی کن.»<small>آزمون‌سازی خودکار از مبحث دلخواه</small></div>
+      <div class="bubble">«برای امتحان فردا، یه برنامه مرور برام بچین.»<small>برنامه مطالعاتی کوتاه‌مدت متناسب با زمان باقی‌مانده</small></div>
+      <div class="bubble">«برای کنکور تجربی، یه آزمون تست زمان‌دار برام بچین.»<small>شبیه‌سازی آزمون با شرایط واقعی کنکور</small></div>
+      <div class="bubble">«این مسئله فیزیک رو مرحله‌به‌مرحله راهنمایی کن تا خودم حلش کنم.»<small>راهنمایی، نه ارائه صرف پاسخ نهایی</small></div>
+      <div class="bubble">«می‌خوام معدلم رو در بلندمدت بالا ببرم، از کجا شروع کنم؟»<small>تحلیل وضعیت و ارائه مسیر بهبود تدریجی</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 BENEFITS ================= -->
+<section id="benefits">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۰</span><h2>مزیت‌های کلیدی</h2>
+      <p>ارزش‌های اصلی استفاده از دستیار هوشمند دانش‌آموزان برای دانش‌آموزان و خانواده‌ها.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">🕑 دسترسی ۲۴ ساعته به آموزش</span>
+      <span class="tag">🎯 یادگیری متناسب با توانایی فرد</span>
+      <span class="tag">📉 کاهش وابستگی به کلاس‌های تقویتی</span>
+      <span class="tag">📝 آمادگی بهتر برای امتحانات</span>
+      <span class="tag">🚀 تقویت مهارت‌های آینده</span>
+      <span class="tag">👨‍👩‍👧 مشارکت آگاهانه والدین در مسیر تحصیلی</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 TRUST & DEPLOY ================= -->
+<section id="trust" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۱</span><h2>آموزش هوشمند، شخصی‌سازی‌شده و قابل اعتماد</h2>
+      <p>این محصول با بهره‌گیری از فناوری‌های هوش مصنوعی و قابلیت‌های <strong>ISDS AI Factory</strong>، امکان توسعه یک محیط آموزشی تعاملی، متناسب با نظام آموزشی و نیازهای دانش‌آموزان فارسی‌زبان را فراهم می‌کند. قابلیت‌های محصول می‌توانند متناسب با مقاطع تحصیلی، برنامه درسی و نیاز مدارس و خانواده‌ها سفارشی‌سازی شوند.</p>
+      <p>در طراحی این محصول، <strong>حفاظت از اطلاعات دانش‌آموزان، تناسب محتوا با سن و نظارت والدین</strong> از الزامات اصلی خواهد بود.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🔒</span>حریم خصوصی</h3><p>حفاظت از اطلاعات دانش‌آموزان به‌عنوان الزام اصلی طراحی.</p></div>
+      <div class="card"><h3><span class="ic">🧒</span>تناسب با سن</h3><p>محتوای آموزشی متناسب با سن و مقطع تحصیلی هر دانش‌آموز.</p></div>
+      <div class="card"><h3><span class="ic">👨‍👩‍👧</span>نظارت والدین</h3><p>حضور والدین در چرخه یادگیری از طریق پنل اختصاصی.</p></div>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>تعیین مقاطع و برنامه درسی</h3><p>سفارشی‌سازی قابلیت‌ها بر اساس مقاطع تحصیلی و نیاز آموزشی.</p></div>
+      <div class="step"><h3>پیکربندی محتوا</h3><p>تنظیم محتوای آموزشی متناسب با سن و برنامه درسی.</p></div>
+      <div class="step"><h3>فعال‌سازی پنل والدین</h3><p>تعریف اهداف، سطوح نظارت و گزارش‌های پیشرفت.</p></div>
+      <div class="step"><h3>استقرار و شروع</h3><p>راه‌اندازی روی زیرساخت AI Factory و شروع استفاده.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>یک معلم خصوصی هوشمند، همیشه همراه دانش‌آموز</h2>
+  <p>برای مشاهده قابلیت‌ها و بررسی استفاده از دستیار هوشمند دانش‌آموزان در مدرسه یا سازمان آموزشی خود، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست دمو</a>
+    <a class="btn btn-ghost" href="#">بررسی سناریوی آموزشی</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>ISDS AI STUDENT ASSISTANT</b> — فراتر از پاسخ‌گویی به سؤالات؛ همراهی هوشمند در مسیر یادگیری، رشد و شکوفایی استعدادها.
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>

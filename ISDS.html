@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS AI Factory | کاتالوگ قابلیت‌های زیرساخت هوش مصنوعی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark);position:relative}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Mini blocks (ML / Big data) ===== */
+  .mini{
+    background:linear-gradient(180deg,#fbfef5,#fff);
+    border:1.5px solid var(--line);border-radius:16px;padding:24px;
+  }
+  .mini h3{color:var(--lime-dark);font-weight:800;margin-bottom:8px;font-size:1.05rem}
+  .mini p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:step}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:640px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">ISDS AI FACTORY<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#core">بخش‌های اصلی</a>
+      <a href="#studio">استودیو</a>
+      <a href="#services">سرویس‌ها</a>
+      <a href="#ml">یادگیری ماشین</a>
+      <a href="#solutions">راهکارها</a>
+      <a href="#contact">شروع همکاری</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">زیرساخت هوش مصنوعی سازمانی</span>
+  <h1><em>ISDS AI FACTORY</em><br>قابلیت‌های هوش مصنوعی را به فرایندهای سازمان بیاورید</h1>
+  <p>زیرساختی یکپارچه برای توسعه و اجرای برنامه‌های هوش مصنوعی: مدیریت داده، دسترسی به مدل‌ها، محیط برنامه‌نویسی و ساخت بصری جریان‌های کاری، همه در یک محیط.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#contact">درخواست نمایش قابلیت‌ها</a>
+    <a class="btn btn-ghost" href="#core">مشاهده کاتالوگ</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p><strong>ISDS AI FACTORY</strong> زیرساختی یکپارچه برای توسعه و اجرای برنامه‌های هوش مصنوعی در سازمان است. از ساخت دستیار پاسخ‌گو بر پایه اسناد سازمان تا پردازش متن، صوت و تصویر و تحلیل داده‌های جدولی، اجزای AI Factory امکان طراحی کاربردهای مختلف را در یک محیط فراهم می‌کنند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🧠</span>مدل‌های آماده</h3><p>دسترسی به مدل‌های زبانی، ترجمه، گفتار و بینایی بدون نیاز به بارگذاری مستقل.</p></div>
+      <div class="card"><h3><span class="ic">🗂️</span>مدیریت داده</h3><p>ذخیره‌سازی، سازمان‌دهی و اشتراک‌گذاری داده‌های سازمان در یک درایو متمرکز.</p></div>
+      <div class="card"><h3><span class="ic">🧩</span>ساخت بصری</h3><p>طراحی برنامه‌های گفتگو و جریان‌های کاری با اتصال بلوک‌ها، بدون کدنویسی گسترده.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 AI IN PROCESSES ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>هوش مصنوعی در فرایندهای سازمان</h2>
+      <p>استفاده سازمانی از هوش مصنوعی به ارتباط میان <strong>داده، مدل و نرم‌افزار</strong> نیاز دارد. فایل‌ها باید در دسترس باشند، مدل مناسب فراخوانی شود، مراحل پردازش به یکدیگر متصل شوند و نتیجه به کاربر یا سامانه مقصد برسد.</p>
+      <p>AI Factory این مراحل را در یک ساختار مشترک گرد هم می‌آورد؛ کاربران می‌توانند داده‌های خود را مدیریت کنند، برنامه بسازند و قابلیت‌های هوش مصنوعی را از طریق محیط گفتگو، برنامه منتشرشده یا رابط نرم‌افزاری در اختیار مصرف‌کننده قرار دهند.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>داده</h3><p>بارگذاری و سازمان‌دهی فایل‌ها و اسناد در درایو من</p></div>
+      <div class="step"><h3>پردازش</h3><p>فراخوانی مدل و اتصال مراحل پردازش به یکدیگر</p></div>
+      <div class="step"><h3>برنامه</h3><p>ساخت برنامه در استودیو و آزمایش خروجی</p></div>
+      <div class="step"><h3>انتشار</h3><p>ارائه از طریق گفتگو، میز کار یا API به مصرف‌کننده</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 CORE PARTS ================= -->
+<section id="core">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>بخش‌های اصلی AI Factory</h2>
+      <p>پنج جزء اصلی، چرخه کامل توسعه و مصرف هوش مصنوعی سازمانی را پوشش می‌دهند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">📁</span>درایو من</h3><p>ذخیره‌سازی، سازمان‌دهی و اشتراک‌گذاری داده‌ها و فایل‌ها.</p></div>
+      <div class="card"><h3><span class="ic">⚙️</span>سرو مدل‌ها</h3><p>ارائه مدل‌های هوش مصنوعی برای استفاده در کد و برنامه‌های سامانه.</p></div>
+      <div class="card"><h3><span class="ic">💻</span>محیط برنامه‌نویسی</h3><p>توسعه و اجرای کد با منابع پردازشی قابل تخصیص.</p></div>
+      <div class="card"><h3><span class="ic">🎨</span>استودیو</h3><p>ساخت بصری برنامه‌های گفتگو و جریان‌های کاری.</p></div>
+      <div class="card"><h3><span class="ic">🔌</span>انتشار و اتصال</h3><p>ارائه برنامه‌ها از طریق API، اجرای مستقل یا درج در سایت.</p></div>
+      <div class="card"><h3><span class="ic">📊</span>دستیار تحلیل داده</h3><p>بررسی داده‌های جدولی و تهیه تحلیل و نمودار.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 DRIVE ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>درایو من و مدیریت داده</h2>
+      <p>محل نگهداری و مدیریت فایل‌های مورد استفاده در برنامه‌های هوش مصنوعی. کاربران داده‌های خود را بارگذاری و سازمان‌دهی می‌کنند و در اختیار اعضای سامانه یا مراحل پردازش قرار می‌دهند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>بارگذاری فایل و ایجاد پوشه</li>
+          <li>جستجو، فیلتر و مرتب‌سازی فایل‌ها</li>
+          <li>تغییر نام، کپی و جابه‌جایی فایل‌ها و پوشه‌ها</li>
+          <li>اشتراک‌گذاری با اعضای سامانه</li>
+          <li>مشاهده و مدیریت فضای ذخیره‌سازی</li>
+          <li>استفاده از داده‌ها در محیط توسعه و استودیو</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>آماده‌کردن مجموعه اسناد، تصاویر یا داده‌های سازمان برای تحلیل و استفاده در برنامه‌های هوش مصنوعی.</p>
+        <div class="use-case"><b>مثال:</b> مجموعه راهنماها و دستورالعمل‌های سازمان را بارگذاری کنید تا دستیار پاسخ‌گوی سازمانی بر پایه آن‌ها ساخته شود.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 MODEL SERVING ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>سرو مدل‌ها و دسترسی برنامه‌نویسی</h2>
+      <p>مدل‌های فعال هوش مصنوعی برای استفاده در برنامه‌ها در دسترس قرار می‌گیرند. توسعه‌دهندگان از طریق API و SDK پایتون مدل‌ها را فراخوانی می‌کنند و نتیجه را در نرم‌افزار خود به کار می‌گیرند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>دریافت فهرست مدل‌های موجود</li>
+          <li>مشاهده مشخصات ورودی و خروجی مدل‌ها از طریق SDK</li>
+          <li>فراخوانی همگام و ناهمگام مدل‌های پشتیبانی‌شده</li>
+          <li>استفاده از مدل‌های زبانی، ترجمه، گفتار و تعبیه‌سازی متن</li>
+          <li>استفاده از مدل‌های سروشده بدون بارگذاری مستقل</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>افزودن قابلیت‌هایی مانند ترجمه، تحلیل متن یا تبدیل گفتار به متن به نرم‌افزارهای سازمانی.</p>
+        <div class="use-case"><b>مثال:</b> فراخوانی مدل ترجمه در سامانه مکاتبات برای ترجمه خودکار نامه‌های ورودی خارجی.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 IDE ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۶</span><h2>محیط برنامه‌نویسی و منابع پردازشی</h2>
+      <p>محیط توسعه تحت وب به تیم‌های فنی امکان می‌دهد کد، نوت‌بوک و برنامه‌های خود را در زیرساخت اجرا کنند. هر محیط می‌تواند منابع متناسب با نیاز پروژه و ظرفیت موجود دریافت کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>دسترسی به محیط مبتنی بر VS Code، ترمینال و نوت‌بوک پایتون</li>
+          <li>تعیین منابع CPU، GPU، حافظه و فضای ذخیره‌سازی</li>
+          <li>نصب کتابخانه‌ها و افزونه‌های مورد نیاز، متناسب با سیاست استقرار</li>
+          <li>روشن و خاموش کردن محیط برای مدیریت مصرف منابع</li>
+          <li>دسترسی به داده‌های درایو و فراخوانی مدل‌ها با SDK</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>توسعه پردازش اختصاصی، آزمایش مدل‌ها و ساخت اتصال میان AI Factory و نرم‌افزارهای سازمان.</p>
+        <div class="use-case"><b>مثال:</b> ساخت یک ETL اختصاصی روی داده‌های درایو و اتصال نتیجه به سامانه BI سازمان.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 STUDIO ================= -->
+<section id="studio">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۷</span><h2>استودیو و ساخت برنامه‌های هوش مصنوعی</h2>
+      <p>محیطی بصری برای طراحی برنامه؛ کاربران با انتخاب و اتصال بلوک‌ها، مسیر دریافت ورودی، پردازش و ارائه نتیجه را تعریف می‌کنند. در مراحل مورد نیاز نیز می‌توان کد اختصاصی یا فراخوانی API را به جریان اضافه کرد.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">💬</span>گفتگو</h3><p>ساخت دستیار مکالمه‌ای و چت‌بات برای پاسخ‌گویی به کاربران.</p></div>
+      <div class="card"><h3><span class="ic">🔀</span>جریان گفتگو</h3><p>ترکیب مکالمه با مراحل پردازش و مسیرهای شرطی.</p></div>
+      <div class="card"><h3><span class="ic">🧭</span>جریان کاری</h3><p>طراحی فرایند چندمرحله‌ای برای اجرای عملیات روی داده.</p></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+      <ul class="feat">
+        <li>تنظیم و آزمایش برنامه و مشاهده خروجی</li>
+        <li>ورود برنامه از فایل YML</li>
+        <li>انتشار برنامه برای استفاده در میز کار، API یا سایت</li>
+      </ul>
+      <div class="use-case"><b>کاربرد:</b> طراحی فرایندی که درخواست کاربر را دریافت کند، اطلاعات لازم را بازیابی کند و نتیجه را در قالب پاسخ یا خروجی پردازشی ارائه دهد.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 LLM ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۸</span><h2>مدل زبان بزرگ و استخراج دانش</h2>
+      <p>مدل زبان بزرگ، متن ورودی و دستورالعمل را دریافت می‌کند و برای پاسخ‌گویی، تحلیل محتوا یا تولید پیش‌نویس به کار می‌رود. بلوک استخراج دانش، بخش‌های مرتبط از اسناد و پایگاه دانش را بازیابی می‌کند تا برنامه از اطلاعات مورد نیاز استفاده کند.</p>
+    </div>
+    <div class="card">
+      <ul class="feat">
+        <li>تعریف دستورالعمل برای رفتار دستیار</li>
+        <li>پاسخ‌گویی و تولید متن بر اساس اطلاعات ورودی</li>
+        <li>بازیابی محتوای مرتبط با سؤال از پایگاه دانش</li>
+        <li>ترکیب بازیابی دانش و تولید پاسخ در الگوی RAG</li>
+        <li>تشخیص دسته سؤال و هدایت درخواست به مسیر مرتبط</li>
+      </ul>
+      <div class="use-case"><b>کاربرد:</b> دستیار مراجعه به دستورالعمل‌ها، راهنماها و اسناد داخلی سازمان. کیفیت پاسخ به مدل، کیفیت منابع و طراحی فرایند بازیابی وابسته است.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9-11 SERVICES ================= -->
+<section id="services">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۹-۱۱</span><h2>سرویس‌های متن، گفتار و بینایی</h2>
+      <p>مجموعه سرویس‌های پردازش محتوا برای پوشش سه رسان اصلی سازمانی: نوشتار، صوت و تصویر.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3><span class="ic">📝</span>متن</h3>
+        <p>آماده‌سازی محتوای نوشتاری برای مطالعه، دسته‌بندی یا استفاده در مراحل بعد.</p>
+        <ul class="feat">
+          <li>خلاصه‌سازی متن</li>
+          <li>طبقه‌بندی بدون آموزش اختصاصی</li>
+          <li>استخراج اطلاعات</li>
+          <li>ترجمه میان زبان‌های پشتیبانی‌شده</li>
+        </ul>
+        <div class="use-case"><b>کاربرد:</b> پردازش مکاتبات، دسته‌بندی درخواست‌ها، مرور گزارش‌ها.</div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎙️</span>گفتار</h3>
+        <p>تبدیل میان صوت و متن و دسته‌بندی محتوای صوتی.</p>
+        <ul class="feat">
+          <li>گفتار به متن (قابل جستجو و تحلیل)</li>
+          <li>متن به گفتار</li>
+          <li>طبقه‌بندی صوت</li>
+        </ul>
+        <div class="use-case"><b>کاربرد:</b> پیاده‌سازی متن جلسات، پردازش فایل تماس و تولید پاسخ صوتی؛ ترکیب گفتار به متن و خلاصه‌سازی برای تهیه پیش‌نویس صورت‌جلسه.</div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">👁️</span>بینایی</h3>
+        <p>پردازش تصویر و محتوای بصری اسناد؛ استخراج اطلاعات، شناخت صحنه و تولید تصویر.</p>
+        <ul class="feat">
+          <li>استخراج متن تصویر و سند اسکن‌شده (OCR)</li>
+          <li>تولید توضیح متنی و تولید تصویر از توضیح</li>
+          <li>طبقه‌بندی تصویر، تشخیص اشیا و محل آن‌ها</li>
+          <li>قطعه‌بندی تصویر در سطح پیکسل</li>
+          <li>ردیابی اشیا در ویدئو</li>
+          <li>تخمین عمق و وضعیت بدن</li>
+          <li>پرسش‌وپاسخ درباره سند تصویری و بازیابی بصری</li>
+        </ul>
+        <div class="use-case"><b>کاربرد:</b> استخراج اطلاعات از فاکتور و سند اسکن‌شده، جستجوی بصری.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 12 ML ================= -->
+<section id="ml">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۲</span><h2>یادگیری ماشین</h2>
+      <p>ابزارهای یادگیری ماشین برای ساخت مدل روی داده‌های سازمان و تحلیل الگوهای آن در سه دسته اصلی ارائه می‌شوند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="mini">
+        <h3>طبقه‌بندی</h3>
+        <p>تعیین دسته یک داده بر اساس نمونه‌های آموزشی. شامل درخت تصمیم، نزدیک‌ترین همسایه‌ها، ماشین بردار پشتیبان و رگرسیون لجستیک؛ به‌همراه ابزارهای آماده‌سازی داده، تقسیم مجموعه‌داده، ارزیابی و پیش‌بینی.</p>
+      </div>
+      <div class="mini">
+        <h3>خوشه‌بندی</h3>
+        <p>شناسایی گروه‌های مشابه بدون تعیین قبلی دسته هدف. روش‌هایی مانند K-Means، DBSCAN، OPTICS، خوشه‌بندی سلسله‌مراتبی، Spectral، Affinity Propagation و Birch.</p>
+      </div>
+      <div class="mini">
+        <h3>رگرسیون</h3>
+        <p>برآورد مقدار عددی بر اساس داده‌های تاریخی. شامل رگرسیون خطی، درخت تصمیم، جنگل تصادفی، بردار پشتیبان، Ridge، Lasso و ElasticNet.</p>
+      </div>
+    </div>
+    <div class="use-case" style="margin-top:20px"><b>کاربرد:</b> بخش‌بندی مشتریان، پیش‌بینی فروش یا تقاضا و دسته‌بندی داده‌های عملیاتی. ساخت مدل کاربردی به داده مناسب و ارزیابی روی نمونه‌های مستقل نیاز دارد.</div>
+  </div>
+</section>
+
+<!-- ================= 13 EDA ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۳</span><h2>تحلیل اکتشافی داده و نمودار</h2>
+      <p>دستیار تحلیل اکتشافی برای بررسی فایل‌های جدولی مانند Excel و CSV طراحی شده است؛ کاربر درباره داده سؤال می‌پرسد و از قابلیت‌های تحلیل و مصورسازی استفاده می‌کند.</p>
+    </div>
+    <div class="card">
+      <ul class="feat">
+        <li>پرسش درباره داده با زبان طبیعی، از جمله فارسی</li>
+        <li>بررسی داده‌های ناقص یا نامعتبر و کمک به پاک‌سازی</li>
+        <li>تحلیل آماری و توصیفی داده</li>
+        <li>تولید و اجرای کد تحلیلی در چارچوب امکانات سامانه</li>
+        <li>نمایش نتایج با نمودار میله‌ای، خطی و دایره‌ای</li>
+      </ul>
+      <div class="use-case"><b>کاربرد:</b> شناخت وضعیت فروش، بررسی روندهای عملیاتی و تهیه تحلیل اولیه برای تصمیم‌گیری و مدل‌سازی.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14 BIG DATA ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۴</span><h2>کلان داده</h2>
+      <p>ابزارهای مبتنی بر Spark برای طراحی پردازش روی داده‌های حجیم و اجرای تحلیل در بستر توزیع‌شده.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="mini"><h3>پردازش داده</h3><p>بارگذاری و ذخیره داده، فیلتر ردیف‌ها، انتخاب ستون‌ها، نمایش داده جدولی، اجرای SQL و کد اختصاصی.</p></div>
+      <div class="mini"><h3>تحلیل آماری</h3><p>محاسبه همبستگی، کوواریانس، صدک‌ها، آمار ستون‌ها، خلاصه آماری و شناسایی اقلام پرتکرار.</p></div>
+      <div class="mini"><h3>مدل‌سازی و تحلیل متن</h3><p>رگرسیون خطی، کاهش ابعاد، پیشنهاددهی با ALS، نمایش عددی متن با TF-IDF و بردار واژه، پیش‌بینی و ذخیره و بارگذاری مدل.</p></div>
+      <div class="mini"><h3>تحلیل گراف</h3><p>رتبه‌بندی گره‌ها با PageRank، پیمایش BFS، شناسایی اجزای متصل و اجتماع‌ها، شمارش مثلث‌ها و محاسبه مسیرهای کوتاه.</p></div>
+    </div>
+    <div class="use-case" style="margin-top:20px"><b>کاربرد:</b> تحلیل مجموعه‌داده‌های بزرگ، بررسی روابط میان موجودیت‌ها و ساخت فرایندهای پیشنهاددهی. ظرفیت پردازش به زیرساخت و تنظیمات اجرا وابسته است.</div>
+  </div>
+</section>
+
+<!-- ================= 15 LOGIC TOOLS ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۵</span><h2>منطق و ابزارهای تکمیل جریان کاری</h2>
+      <p>خروجی هر مرحله به شکل مناسب وارد مرحله بعد می‌شود و قواعد فرایند در برنامه اعمال می‌گردد.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">🔀 منطق (IF/ELSE و اجرای تکراری)</span>
+      <span class="tag">🔄 تبدیل (کد، قالب، متغیرها)</span>
+      <span class="tag">🌐 ارسال درخواست HTTP</span>
+      <span class="tag">🏁 تعیین پاسخ نهایی</span>
+      <span class="tag">🧾 عملیات JSON</span>
+      <span class="tag">🔍 عبارت منظم (ایمیل، کد پیگیری)</span>
+      <span class="tag">🕐 زمان و منطقه زمانی</span>
+      <span class="tag">🔎 الستیک‌سرچ</span>
+      <span class="tag">📱 تولید QR Code</span>
+      <span class="tag">📚 ویکی‌پدیا</span>
+      <span class="tag">✒️ گنجور (شعر و فال)</span>
+    </div>
+    <div class="use-case"><b>کاربرد:</b> اتصال پردازش هوشمند به قواعد و قالب‌های مورد نیاز نرم‌افزارها. ابزارهای متصل به منابع بیرونی به دسترسی شبکه و تنظیمات آن سرویس نیاز دارند.</div>
+  </div>
+</section>
+
+<!-- ================= 16 PUBLISH ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۶</span><h2>اتصال به سامانه‌ها و انتشار برنامه</h2>
+      <p>برنامه‌های ساخته‌شده در محیط سامانه اجرا می‌شوند یا از طریق رابط‌های انتشار در اختیار نرم‌افزارها و کاربران دیگر قرار می‌گیرند.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🚀</span>روش‌های استفاده</h3>
+      <ul class="feat">
+        <li>اجرای برنامه در محیط استودیو برای آزمایش</li>
+        <li>انتشار و استفاده در میز کار</li>
+        <li>اجرای مستقل برنامه در بستر AI Factory</li>
+        <li>فراخوانی برنامه منتشرشده از طریق API و کلید دسترسی</li>
+        <li>درج برنامه یا دستیار در سایت و پرتال با کد تعبیه‌شده</li>
+        <li>استفاده از SDK پایتون برای فراخوانی مدل‌ها در کد</li>
+      </ul>
+      <div class="use-case"><b>اتصال سازمانی:</b> اتصال به سامانه‌هایی مانند CRM، ERP یا منابع انسانی از طریق API قابل طراحی است. دامنه اتصال به رابط‌های موجود، سطح دسترسی و نیاز پروژه بستگی دارد.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 17 SOLUTIONS ================= -->
+<section id="solutions">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۷</span><h2>نمونه راهکارهای قابل ساخت</h2>
+      <p>این نمونه‌ها مسیرهای استفاده از قابلیت‌های AI Factory هستند؛ پیاده‌سازی هر راهکار بر اساس داده، فرایند و معیار پذیرش سازمان انجام می‌شود.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">📚</span>دستیار دانش سازمانی</h3><p>ترکیب استخراج دانش و مدل زبانی برای پاسخ‌گویی بر پایه اسناد و راهنماهای سازمان.</p></div>
+      <div class="card"><h3><span class="ic">📄</span>پردازش اسناد</h3><p>ترکیب OCR، استخراج اطلاعات و قواعد جریان کاری برای آماده‌سازی داده اسناد و ارسال نتیجه به سامانه مقصد.</p></div>
+      <div class="card"><h3><span class="ic">🗓️</span>پردازش جلسات و تماس‌ها</h3><p>تبدیل صوت به متن، خلاصه‌سازی محتوا و استخراج اطلاعات مورد نیاز برای بازبینی کاربر.</p></div>
+      <div class="card"><h3><span class="ic">🎧</span>دستیار خدمات مشتری</h3><p>ترکیب پایگاه دانش، تشخیص موضوع درخواست و فراخوانی ابزار برای طراحی مسیر پاسخ‌گویی و دریافت اطلاعات از سامانه‌های مرتبط.</p></div>
+      <div class="card"><h3><span class="ic">📈</span>تحلیل و پیش‌بینی</h3><p>ترکیب آماده‌سازی داده، روش‌های یادگیری ماشین و نمودار برای بررسی الگوها و تولید پیش‌بینی.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 18 DEPLOY / CTA ================= -->
+<section id="contact" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۸</span><h2>استقرار و شروع همکاری</h2>
+      <p>AI Factory با رویکرد استفاده سازمانی و امکان <strong>استقرار در زیرساخت داخلی</strong> ارائه می‌شود. محل نگهداری داده، مدل‌های مورد استفاده، دسترسی‌های شبکه و منابع پردازشی بر اساس نیاز سازمان تعیین می‌شوند. اجرای کاملاً داخلی به انتخاب مدل‌ها و سرویس‌هایی وابسته است که به پردازش بیرونی نیاز نداشته باشند.</p>
+      <p>زبان‌ها، فرمت‌ها، ظرفیت پردازش و امکانات قابل ارائه در هر استقرار، متناسب با مدل‌های فعال و منابع اختصاص‌یافته مشخص می‌شوند.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>بررسی کاربرد</h3><p>یک کاربرد مشخص و نمونه‌ای از داده‌های مرتبط مبنای بررسی قرار می‌گیرد.</p></div>
+      <div class="step"><h3>انتخاب قابلیت‌ها</h3><p>قابلیت‌های مورد نیاز از کاتالوگ انتخاب می‌شوند.</p></div>
+      <div class="step"><h3>نسخه اولیه</h3><p>نسخه اولیه برای ارزیابی با داده واقعی شکل می‌گیرد.</p></div>
+      <div class="step"><h3>توسعه و اتصال</h3><p>توسعه دامنه و اتصال به سامانه‌های عملیاتی بر اساس نتیجه ارزیابی.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>قابلیت‌های AI Factory را در سازمان خود فعال کنید</h2>
+  <p>برای مشاهده قابلیت‌ها و بررسی کاربرد مورد نظر سازمان خود، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست دمو</a>
+    <a class="btn btn-ghost" href="#">بررسی سناریوی سازمانی</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>ISDS AI FACTORY</b> — زیرساخت هوش مصنوعی سازمانی
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>

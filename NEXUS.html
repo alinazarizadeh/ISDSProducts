@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS STUDIO | کاتالوگ قابلیت‌های پلتفرم هوش مصنوعی عاملیت‌محور</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark);position:relative}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card h3 .no{
+    font-size:.65em;color:var(--lime-dark);border:1.5px solid var(--lime-mid);
+    border-radius:7px;padding:0 6px;margin-inline-start:auto;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  ul.feat li b{color:var(--ink)}
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+  .tag-arrow{border:none;background:none;color:var(--lime-dark);font-weight:900;padding:0 2px}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:step}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+  .step p small{display:block;color:var(--lime-dark);font-weight:700;font-size:.78rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:640px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">NEXUS STUDIO<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#journey">فرایند اجرا</a>
+      <a href="#core">بخش‌های اصلی</a>
+      <a href="#gov">حاکمیت و اتصال</a>
+      <a href="#solutions">راهکارها</a>
+      <a href="#contact">شروع همکاری</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">پلتفرم هوش مصنوعی عاملیت‌محور | Agentic AI Platform</span>
+  <h1><em>NEXUS STUDIO</em><br>فراتر از یک دستیار — بستری برای انجام واقعی کارها</h1>
+  <p>اجرای واقعی فرایندهای پیچیده دانش‌بنیادی و سازمانی با هوش مصنوعی عاملیت‌محور: برنامه‌ریزی پویا، اتصال کنترل‌شده به ابزارها و داده‌های سازمان، اجرای امن کد و خودارزیابی، همه در یک پلتفرم.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#contact">درخواست نمایش قابلیت‌ها</a>
+    <a class="btn btn-ghost" href="#core">مشاهده کاتالوگ</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p><strong>NEXUS STUDIO</strong> صرفاً یک چت‌بات نیست؛ یک <strong>موتور هوش مصنوعی عاملیت‌محور</strong> است. هدف را از کاربر دریافت می‌کند، مستندات و ابزارهای لازم را انتخاب و اجرا می‌کند و به‌جای یک پاسخ متنی، <strong>نتیجه نهایی کار</strong> را تحویل می‌دهد.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🎯</span>انجام کار، نه فقط پاسخ</h3><p>هدف را می‌گیرد، مراحل را اجرا می‌کند و خروجی آن نتیجه نهایی کار است، نه صرفاً متن توضیحی.</p></div>
+      <div class="card"><h3><span class="ic">⚙️</span>موتور اجرای عامل</h3><p>مدیریت چرخه کامل اجرا؛ تیم‌های فنی بر منطق کار تمرکز می‌کنند، نه مکانیک‌های Prompt.</p></div>
+      <div class="card"><h3><span class="ic">🔗</span>اتصال به سازمان</h3><p>از طریق Model Context Protocol به ابزارها، داده‌ها و Workflowهای واقعی سازمان متصل می‌شود.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 JOURNEY ================= -->
+<section id="journey">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>از «پرسش» تا «انجام کار»</h2>
+      <p>استفاده واقعی از هوش مصنوعی به اجرای یک زنجیره کامل نیاز دارد: درک هدف، برنامه‌ریزی، دسترسی کنترل‌شده به منابع، اجرا، ارزیابی و تحویل نتیجه. NEXUS STUDIO این زنجیره را به‌صورت خودکار مدیریت می‌کند.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>هدف کسب‌وکار</h3><p>«این داده‌ها را تحلیل کن»<small>Goal</small></p></div>
+      <div class="step"><h3>درک و برنامه‌ریزی</h3><p>طراحی مسیر اجرا<small>Dynamic Planning</small></p></div>
+      <div class="step"><h3>دسترسی کنترل‌شده</h3><p>مجوز و محدودیت‌ها<small>Governed AI</small></p></div>
+      <div class="step"><h3>ابزار و داده سازمان</h3><p>اتصال به منابع واقعی<small>MCP Servers &amp; Tools</small></p></div>
+      <div class="step"><h3>اجرای کد ایزوله</h3><p>محیط امن و محصور<small>Sandbox</small></p></div>
+      <div class="step"><h3>خودارزیابی و اصلاح</h3><p>بازبینی نتیجه هر مرحله<small>Self-Evaluation</small></p></div>
+      <div class="step"><h3>مدیریت حافظه</h3><p>فشرده‌سازی و انتقال اطلاعات<small>Context Engineering</small></p></div>
+      <div class="step"><h3>نتیجه نهایی</h3><p>نه پاسخ — انجام کار<small>Result</small></p></div>
+    </div>
+    <div class="use-case" style="margin-top:24px"><b>رفتار عامل:</b> عامل هوشمند خودش مستندات را می‌خواند، برنامه می‌ریزد، اجرا می‌کند و در صورت خطا مسیر را اصلاح می‌کند.</div>
+    <div class="tags">
+      <span class="tag">🎯 Goal</span><span class="tag-arrow">←</span>
+      <span class="tag">🗺️ Plan</span><span class="tag-arrow">←</span>
+      <span class="tag">🛠️ Tools</span><span class="tag-arrow">←</span>
+      <span class="tag">💻 Code</span><span class="tag-arrow">←</span>
+      <span class="tag">✅ Evaluate</span><span class="tag-arrow">←</span>
+      <span class="tag">🏁 Result</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 CORE PARTS ================= -->
+<section id="core">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>بخش‌های اصلی NEXUS STUDIO</h2>
+      <p>نُه موتور تخصصی، چرخه کامل اجرای فرایندهای هوشمند سازمانی را پوشش می‌دهند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🚀</span>انجام کار<span class="no">۰۱</span></h3><p>از «پرسش و پاسخ» تا «انجام کار»؛ تحویل نتیجه نهایی.</p></div>
+      <div class="card"><h3><span class="ic">⚙️</span>Agentic Harness<span class="no">۰۲</span></h3><p>موتور اجرای عامل و مدیریت چرخه کامل اجرا.</p></div>
+      <div class="card"><h3><span class="ic">🧠</span>Context Engineering<span class="no">۰۳</span></h3><p>حافظه هوشمند و بهینه‌سازی خودکار اطلاعات.</p></div>
+      <div class="card"><h3><span class="ic">🧭</span>Dynamic Planning<span class="no">۰۴</span></h3><p>برنامه‌ریزی پویا و اصلاح مسیر در هر مرحله.</p></div>
+      <div class="card"><h3><span class="ic">🛡️</span>Governed AI<span class="no">۰۵</span></h3><p>دستیار حاکمیت‌شده با دسترسی کنترل‌شده.</p></div>
+      <div class="card"><h3><span class="ic">🔌</span>MCP &amp; Tools<span class="no">۰۶</span></h3><p>اتصال عامل به ابزارها و داده‌های سازمان.</p></div>
+      <div class="card"><h3><span class="ic">📊</span>تحلیل پیشرفته داده<span class="no">۰۷</span></h3><p>دریافت، بررسی و تحلیل داده از منابع سازمان.</p></div>
+      <div class="card"><h3><span class="ic">🔒</span>اجرای امن کد<span class="no">۰۸</span></h3><p>اجرای ایزوله و کنترل‌شده کد در Sandbox.</p></div>
+      <div class="card"><h3><span class="ic">♻️</span>Self-Evaluation<span class="no">۰۹</span></h3><p>خودارزیابی، تلاش مجدد و بازیابی از خطا.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 CAP 01 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>از «پرسش و پاسخ» تا «انجام کار»</h2>
+      <p>تفاوت اصلی NEXUS STUDIO با ابزارهای گفتگومحور در خروجی آن است: به‌جای ارائه پاسخ متنی، فرایند اجرا می‌شود و نتیجه نهایی کار تحویل داده می‌شود.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>موتور <b>هوش مصنوعی عاملیت‌محور</b>؛ صرفاً یک چت‌بات نیست</li>
+          <li>دریافت هدف از کاربر و انتخاب مستندات و ابزارهای لازم</li>
+          <li>اجرای مراحل کار و ترکیب نتایج میانی</li>
+          <li>خروجی: <b>نتیجه نهایی کار</b>، نه صرفاً پاسخ متنی</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>هر سناریویی که خروجی مطلوب آن یک «کار انجام‌شده» است، نه یک متن توضیحی.</p>
+        <div class="use-case"><b>مثال:</b> «رسیدها را تحلیل کن» ← خواندن فایل ← شناخت جدول‌ها ← دسته‌بندی ← تحلیل ← گزارش نهایی.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 CAP 02 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>Agentic Harness و موتور اجرای عامل</h2>
+      <p>بخش اجرایی پلتفرم که چرخه کامل حیات یک عامل هوشمند — از راه‌اندازی تا تولید پاسخ نهایی — را مدیریت می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>مدیریت <b>چرخه کامل اجرا</b>: از راه‌اندازی تا تولید پاسخ نهایی</li>
+          <li>ساخت و هماهنگی اجرای کد، استفاده از ابزارها و تولید پاسخ</li>
+          <li>جداسازی منطق کار از مکانیک‌های اجرای عامل</li>
+          <li>تمرکز مهندسان بر <b>منطق کسب‌وکار</b>، نه مکانیک‌های Prompt</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>توسعه سریع عامل‌های سازمانی بدون ورود به جزئیات فنی زیرساخت اجرا.</p>
+        <div class="use-case"><b>مثال:</b> تیم توسعه تنها سناریو و منطق فرایند را تعریف می‌کند؛ موتور اجرا، چرخه اجرا را به‌صورت خودکار مدیریت می‌کند.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 CAP 03 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۶</span><h2>Context Engineering و حافظه هوشمند</h2>
+      <p>در فرایندهای طولانی، حجم اطلاعات می‌تواند از ظرفیت پنجره Context عبور کند. این بخش اطلاعات را به‌صورت خودکار فشرده و مدیریت می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>خلاصه‌سازی و <b>بهینه‌سازی خودکار اطلاعات</b> تا سقف پنجره Context</li>
+          <li>حفظ اطلاعات مهم و فشرده‌سازی نتایج مراحل قبلی</li>
+          <li>انتقال نتایج مراحل پیشین به مراحل بعدی فرایند</li>
+          <li>جلوگیری از <b>سرریز Token</b> در فرایندهای طولانی</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>اجرای فرایندهای چندمرحله‌ای و حجیم بدون افت کیفیت یا از دست رفتن اطلاعات.</p>
+        <div class="use-case"><b>مثال:</b> تحلیل یک گزارش چندصدصفحه‌ای در چند مرحله، بدون از دست رفتن یافته‌های مراحل اولیه.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 CAP 04 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۷</span><h2>برنامه‌ریزی پویا (Dynamic Planning)</h2>
+      <p>فرایندهای واقعی همیشه خطی و قابل پیش‌بینی نیستند. عامل، برنامه خود را در هر مرحله بر اساس نتایج واقعی بازنگری و اصلاح می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>پذیرش این واقعیت که فرایندهای واقعی <b>خطی و قابل پیش‌بینی نیستند</b></li>
+          <li>بازنگری و <b>اصلاح برنامه در هر مرحله</b> بر اساس نتایج</li>
+          <li>انتخاب مسیرهای جدید یا اصلاح مسیر فعلی</li>
+          <li>رفتار نزدیک به <b>سیستم‌های خودترتیب</b> (Self-Organizing)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>سناریوهایی که نتیجه هر مرحله، مسیر مرحله بعد را تعیین می‌کند.</p>
+        <div class="use-case"><b>مثال:</b> اگر داده ورودی ناقص باشد، عامل مسیر را به سمت استخراج اطلاعات از سند اصلی اصلاح می‌کند و ادامه می‌دهد.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 CAP 05 ================= -->
+<section id="gov">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۸</span><h2>Governed AI Assistant — دستیار حاکمیت‌شده</h2>
+      <p>استفاده از عامل‌ها در محیط‌های حساس سازمانی نیازمند کنترل و نظارت است. این بخش، دسترسی و رفتار عامل را در چارچوب سیاست‌های سازمان نگه می‌دارد.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>دسترسی <b>محدود و کنترل‌شده</b> به اطلاعات و ابزارها</li>
+          <li>تعریف <b>سیاست‌های محیطی</b> و محدودیت دسترسی</li>
+          <li>کنترل ابزارهای قابل استفاده توسط هر عامل</li>
+          <li>حاکمیت داده‌ای، <b>Audit و Approval</b> در معماری ISDS</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>استقرار عامل‌ها در واحدهای حساس سازمان با نظارت و ثبت کامل رخدادها.</p>
+        <div class="use-case"><b>مثال:</b> دسترسی عامل به هر منبع اطلاعاتی بر اساس سیاست‌های تعریف‌شده انجام می‌شود و تمام اقدامات آن قابل بازرسی (Audit) است.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9 CAP 06 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۹</span><h2>MCP Servers &amp; Tools — اتصال به ابزارها و داده‌ها</h2>
+      <p>با Model Context Protocol، عامل به ابزارها، داده‌ها و Workflowهای واقعی سازمان متصل می‌شود؛ از یک سیستم گفتگومحور به یک <strong>سیستم عاملیتی کامل</strong>.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+      <ul class="feat">
+        <li>اتصال عامل به ابزارها و داده‌ها با <b>Model Context Protocol</b></li>
+        <li>ابزارهای آماده متعدد به‌همراه <b>ابزارهای اختصاصی</b> برای هر سازمان</li>
+        <li>تعریف ابزار جدید برای سامانه‌های داخلی سازمان</li>
+        <li>تبدیل عامل از یک سیستم صرف به <b>یک سیستم عاملیتی کامل</b></li>
+      </ul>
+      <div class="tags">
+        <span class="tag">🤖 Agent</span>
+        <span class="tag">🔌 MCP Server</span>
+        <span class="tag">🗄️ Data</span>
+        <span class="tag">🛠️ Tools</span>
+        <span class="tag">🔁 Workflow</span>
+      </div>
+      <div class="use-case"><b>مثال:</b> اتصال عامل به MCP سرور داخلی برای استعلام اطلاعات از سامانه‌های سازمانی و ثبت نتیجه اقدام در سامانه مقصد.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 CAP 07 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۰</span><h2>تحلیل پیشرفته داده</h2>
+      <p>عامل به‌صورت خودکار داده‌ها را از منابع سازمان دریافت، بررسی و تحلیل می‌کند و مشکل اصلی داده‌ها را در قالب یک گزارش ارائه می‌دهد.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>دریافت خودکار داده از <b>منابع داده سازمان</b></li>
+          <li>بررسی و دسته‌بندی داده‌ها</li>
+          <li>ارائه <b>تحلیل اصلی</b> داده‌ها</li>
+          <li>توانایی <b>تشخیص مشکل اصلی</b> داده‌ها و ارائه آن در یک گزارش</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>تبدیل داده خام سازمان به بینش قابل استفاده برای تصمیم‌گیری.</p>
+        <div class="use-case"><b>مثال:</b> دریافت داده فروش از منابع سازمان، دسته‌بندی و تحلیل آن‌ها و ارائه گزارشی با تشخیص ریشه اصلی مشکل.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 CAP 08 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۱</span><h2>اجرای ایزوله و امن کد</h2>
+      <p>عامل‌های NEXUS STUDIO فقط حرف نمی‌زنند؛ برای انجام واقعی کار، کد را در محیطی ایزوله، محصور و کنترل‌شده اجرا می‌کنند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>اجرای کد در <b>محیط ایزوله (Sandbox)</b> محصور و کنترل‌شده تا پایان کار</li>
+          <li>محدودسازی سطح دسترسی متناسب با <b>ریسک عملیات</b></li>
+          <li>کنترل کامل منابع و دسترسی‌های محیط اجرا</li>
+          <li>عامل‌هایی که به‌جای گفتن، <b>اقدام واقعی</b> انجام می‌دهند</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>اجرای امن محاسبات و پردازش‌های لازم برای تکمیل فرایند، بدون به‌خطر انداختن زیرساخت.</p>
+        <div class="use-case"><b>مثال:</b> اجرای اسکریپت تحلیل روی داده‌های مالی در Sandbox، بدون دسترسی به سایر بخش‌های شبکه سازمان.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 12 CAP 09 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۲</span><h2>Self-Evaluation &amp; Recovery — خودارزیابی و بازیابی</h2>
+      <p>فرایند در اولین خطا نمی‌شکند. عامل نتیجه هر مرحله را ارزیابی می‌کند و در صورت نیاز، مسیر را اصلاح و اجرا را ادامه می‌دهد.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>ارزیابی نتیجه هر مرحله توسط خود عامل</li>
+          <li><b>تلاش مجدد</b> و اصلاح مسیر در صورت خطا</li>
+          <li>ادامه فرایند تا رسیدن به نتیجه نهایی؛ توقف در اولین خطا</li>
+          <li><b>خودتصحیحی</b> عملکرد در حین اجرا</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>افزایش قابلیت اطمینان در فرایندهای طولانی و چندمرحله‌ای.</p>
+        <div class="use-case"><b>مثال:</b> اگر فراخوانی یک ابزار با خطا مواجه شود، عامل روش جایگزین را امتحان می‌کند یا مسیر اجرا را اصلاح می‌کند.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 13 EXTENSIBILITY ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۳</span><h2>توسعه‌پذیری و کاربردهای سازمانی</h2>
+      <p>NEXUS STUDIO لایه گمشده اجرای فرایندهای هوشمند را پر می‌کند: این کاربردها صرفاً یک چت نیستند؛ ترکیبی از <strong>داده، ابزار سازمانی، اطلاعات واقعی، Workflow و Agent</strong> برای اجرای یک فرایند کامل‌اند.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🧩</span>توسعه‌پذیری</h3>
+      <ul class="feat">
+        <li>افزودن <b>Agentهای جدید</b>، سرویس‌ها و Workflowهای جدید بدون محدودیت</li>
+        <li>ادغام محصولات هوشمند و توسعه فرایندهای موجود</li>
+        <li>تعامل با <b>سامانه‌های داخلی</b> و هماهنگی واحدهای مختلف</li>
+        <li>دستیار واحد برای فروش، طبقه‌بندی اطلاعات و واحدهای تخصصی</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">📊 داده</span><span class="tag-arrow">+</span>
+        <span class="tag">🛠️ ابزار سازمانی</span><span class="tag-arrow">+</span>
+        <span class="tag">📄 اطلاعات واقعی</span><span class="tag-arrow">+</span>
+        <span class="tag">🔁 Workflow</span><span class="tag-arrow">+</span>
+        <span class="tag">🤖 Agent</span><span class="tag-arrow">=</span>
+        <span class="tag">🏁 اجرای کامل فرایند</span>
+      </div>
+      <div class="use-case"><b>دامنه کاربرد:</b> پذیرش بیمه، اسناد مالی، اتوماسیون اداری، گزارش‌دهی، دستیار واحد فروش و طبقه‌بندی اطلاعات در واحدهای تخصصی سازمان.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14 SOLUTIONS ================= -->
+<section id="solutions">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۴</span><h2>نمونه راهکارهای قابل ساخت</h2>
+      <p>این نمونه‌ها مسیرهای استفاده از قابلیت‌های NEXUS STUDIO هستند؛ پیاده‌سازی هر راهکار بر اساس داده، فرایند و معیار پذیرش سازمان انجام می‌شود.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🧾</span>تحلیل اسناد و رسیدها</h3><p>ترکیب خواندن فایل، شناخت ساختار داده، دسته‌بندی و تولید گزارش نهایی به‌صورت یک فرایند عاملیت‌محور.</p></div>
+      <div class="card"><h3><span class="ic">🛡️</span>پذیرش بیمه</h3><p>بررسی مدارک، استعلام از ابزارهای سازمان و اجرای قواعد پذیرش با برنامه‌ریزی پویا و خودارزیابی.</p></div>
+      <div class="card"><h3><span class="ic">💰</span>اسناد مالی و گزارش‌دهی</h3><p>تحلیل داده‌های مالی، تشخیص مشکل اصلی و تهیه گزارش برای واحدهای تخصصی.</p></div>
+      <div class="card"><h3><span class="ic">🤝</span>دستیار واحد فروش</h3><p>دستیار واحد با اتصال به سامانه‌های داخلی و اطلاعات واقعی سازمان برای پاسخ‌گویی و انجام اقدام.</p></div>
+      <div class="card"><h3><span class="ic">🗂️</span>طبقه‌بندی اطلاعات</h3><p>دسته‌بندی خودکار اسناد و محتوای سازمان بر اساس قواعد و داده‌های مرجع.</p></div>
+      <div class="card"><h3><span class="ic">🔁</span>اتوماسیون فرایندها</h3><p>اجرای Workflowهای چندمرحله‌ای با اتصال به ابزارها، اجرای امن کد و بازیابی از خطا.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 15 DEPLOY / CTA ================= -->
+<section id="contact" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۵</span><h2>استقرار و شروع همکاری</h2>
+      <p>NEXUS STUDIO در <strong>معماری ISDS</strong> ارائه می‌شود و از حاکمیت داده‌ای، Audit و Approval همان زیرساخت بهره می‌برد. سیاست‌های محیطی، سطح دسترسی عامل‌ها، ابزارهای قابل اتصال و منابع پردازشی بر اساس نیاز و ساختار سازمان تعیین می‌شوند.</p>
+      <p>برای شروع، یک فرایند مشخص از سازمان به‌عنوان سناریوی پایه انتخاب و روی داده واقعی پیاده‌سازی می‌شود.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>بررسی کاربرد</h3><p>انتخاب یک فرایند واقعی و نمونه داده‌های مرتبط به‌عنوان سناریوی پایه.</p></div>
+      <div class="step"><h3>تعریف عامل و ابزارها</h3><p>تعیین دسترسی‌ها، سیاست‌های محیطی و ابزارهای MCP مورد نیاز.</p></div>
+      <div class="step"><h3>نسخه اولیه</h3><p>اجرای نسخه اولیه عامل روی داده واقعی و ارزیابی نتیجه.</p></div>
+      <div class="step"><h3>توسعه و اتصال</h3><p>توسعه دامنه فرایند و اتصال به سامانه‌های عملیاتی سازمان.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>فرایندهای سازمان خود را با NEXUS STUDIO اجرا کنید</h2>
+  <p>برای مشاهده قابلیت‌ها و بررسی سناریوی مورد نظر سازمان، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست دمو</a>
+    <a class="btn btn-ghost" href="#">بررسی سناریوی سازمانی</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>NEXUS STUDIO</b> — پلتفرم هوش مصنوعی عاملیت‌محور در معماری ISDS
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>

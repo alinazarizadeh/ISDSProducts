@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISDS InsightAI | کاتالوگ قابلیت‌های Conversational BI و تصمیم‌یاری</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime: #84cc16;
+    --lime-dark: #4d7c0f;
+    --lime-light: #ecfccb;
+    --lime-mid: #bef264;
+    --ink: #1c2416;
+    --gray: #5b6553;
+    --line: #e7eedd;
+    --bg: #ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.9;
+    font-size:16px;
+  }
+  .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ===== Top Nav ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--lime);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:900;font-size:1.15rem}
+  .logo span{color:var(--lime-dark)}
+  .logo .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);margin-inline-start:6px}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{
+    text-decoration:none;color:var(--gray);font-size:.85rem;font-weight:500;
+    padding:6px 12px;border-radius:99px;transition:.2s;
+  }
+  nav.links a:hover{background:var(--lime-light);color:var(--lime-dark)}
+  @media(max-width:900px){nav.links{display:none}}
+
+  /* ===== Hero ===== */
+  .hero{
+    text-align:center;
+    padding:90px 24px 70px;
+    background:
+      radial-gradient(600px 300px at 15% 0%, var(--lime-light) 0%, transparent 60%),
+      radial-gradient(600px 300px at 85% 10%, #f7fee7 0%, transparent 60%),
+      var(--bg);
+  }
+  .badge{
+    display:inline-block;background:var(--lime-light);color:var(--lime-dark);
+    border:1px solid var(--lime-mid);border-radius:99px;
+    font-size:.8rem;font-weight:700;padding:6px 18px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.4;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--lime-dark);position:relative}
+  .hero p{max-width:720px;margin:0 auto;color:var(--gray);font-size:1.05rem}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    text-decoration:none;font-weight:700;font-size:.95rem;
+    padding:12px 32px;border-radius:12px;transition:.2s;display:inline-block;
+  }
+  .btn-primary{background:var(--lime);color:#fff;box-shadow:0 8px 24px rgba(132,204,22,.35)}
+  .btn-primary:hover{background:var(--lime-dark);transform:translateY(-2px)}
+  .btn-ghost{border:2px solid var(--lime);color:var(--lime-dark);background:#fff}
+  .btn-ghost:hover{background:var(--lime-light)}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:28px}
+  .sec-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:44px;height:44px;border-radius:12px;
+    background:var(--lime);color:#fff;font-weight:900;font-size:1.05rem;
+    margin-inline-end:12px;box-shadow:0 4px 12px rgba(132,204,22,.3);
+  }
+  .sec-head h2{font-size:1.6rem;font-weight:800;display:inline;vertical-align:middle}
+  .sec-head p{color:var(--gray);margin-top:12px;max-width:800px}
+  .sec-head strong{color:var(--lime-dark)}
+
+  /* ===== Cards ===== */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .card{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;
+    padding:24px;transition:.25s;
+  }
+  .card:hover{border-color:var(--lime);box-shadow:0 10px 30px rgba(132,204,22,.12);transform:translateY(-3px)}
+  .card h3{font-size:1.05rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h3 .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--lime-light);
+    display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  }
+  .card h3 .no{
+    font-size:.65em;color:var(--lime-dark);border:1.5px solid var(--lime-mid);
+    border-radius:7px;padding:0 6px;margin-inline-start:auto;
+  }
+  .card p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Feature list ===== */
+  ul.feat{list-style:none;margin-top:14px}
+  ul.feat li{
+    padding:7px 34px 7px 0;position:relative;color:#3b4433;font-size:.94rem;
+  }
+  ul.feat li::before{
+    content:"";position:absolute;right:6px;top:15px;
+    width:9px;height:9px;border-radius:3px;background:var(--lime);transform:rotate(45deg);
+  }
+  ul.feat li b{color:var(--ink)}
+  .use-case{
+    margin-top:18px;background:var(--lime-light);border-inline-start:4px solid var(--lime);
+    border-radius:0 12px 12px 0;padding:14px 18px;font-size:.92rem;
+  }
+  .use-case b{color:var(--lime-dark)}
+
+  /* ===== Mini blocks ===== */
+  .mini{
+    background:linear-gradient(180deg,#fbfef5,#fff);
+    border:1.5px solid var(--line);border-radius:16px;padding:24px;
+  }
+  .mini h3{color:var(--lime-dark);font-weight:800;margin-bottom:8px;font-size:1.05rem}
+  .mini p{color:var(--gray);font-size:.92rem}
+
+  /* ===== Tags ===== */
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
+  .tag{
+    background:#fff;border:1.5px solid var(--lime-mid);color:var(--lime-dark);
+    border-radius:99px;padding:5px 16px;font-size:.85rem;font-weight:600;transition:.2s;
+  }
+  .tag:hover{background:var(--lime);color:#fff;border-color:var(--lime)}
+  .tag-arrow{border:none;background:none;color:var(--lime-dark);font-weight:900;padding:0 2px}
+  .tag-alt{background:var(--lime-light);border-color:var(--lime);color:var(--lime-dark)}
+
+  /* ===== Steps ===== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:step}
+  .step{
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;
+  }
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-16px;right:20px;width:34px;height:34px;border-radius:50%;
+    background:var(--lime);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(132,204,22,.35);
+  }
+  .step h3{font-size:1rem;font-weight:800;margin:10px 0 6px}
+  .step p{color:var(--gray);font-size:.9rem}
+  .step p small{display:block;color:var(--lime-dark);font-weight:700;font-size:.78rem}
+
+  /* ===== CTA ===== */
+  .cta{
+    text-align:center;padding:70px 24px;
+    background:linear-gradient(135deg,#f7fee7,#fff 55%,#ecfccb);
+  }
+  .cta h2{font-size:1.8rem;font-weight:900;margin-bottom:14px}
+  .cta p{color:var(--gray);max-width:640px;margin:0 auto 30px}
+
+  /* ===== Footer ===== */
+  footer{background:#1c2416;color:#c9d6b0;text-align:center;padding:28px;font-size:.85rem}
+  footer b{color:var(--lime-mid)}
+
+  /* back to top */
+  .top{
+    position:fixed;bottom:24px;left:24px;width:46px;height:46px;border-radius:50%;
+    background:var(--lime);color:#fff;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;font-size:1.2rem;box-shadow:0 6px 18px rgba(132,204,22,.4);transition:.2s;z-index:99;
+  }
+  .top:hover{background:var(--lime-dark);transform:translateY(-3px)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">ISDS INSIGHTAI<span class="dot"></span></div>
+    <nav class="links">
+      <a href="#intro">معرفی</a>
+      <a href="#pipeline">خط تولید داده</a>
+      <a href="#core">بخش‌های اصلی</a>
+      <a href="#gov">پایش و گزارش</a>
+      <a href="#decision">تصمیم‌یاری</a>
+      <a href="#solutions">راهکارها</a>
+      <a href="#contact">شروع همکاری</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="badge">Conversational BI | پلتفرم هوشمند تحلیل، داشبورد و گفتگو با داده</span>
+  <h1><em>ISDS INSIGHTAI</em><br>از داده خام تا تصمیم هوشمند، فقط با یک گفتگو</h1>
+  <p>نه صرفاً یک Dashboard؛ یک موتور دو جزئی: <strong>Conversation + BI</strong>. کاربر به زبان طبیعی سؤال می‌پرسد و سامانه داده را تحلیل، شاخص‌ها را استخراج، داشبورد می‌سازد و بینش قابل اقدام ارائه می‌کند — از Data Integration تا Decision Intelligence.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#contact">درخواست نمایش قابلیت‌ها</a>
+    <a class="btn btn-ghost" href="#core">مشاهده کاتالوگ</a>
+  </div>
+</div>
+
+<!-- ================= 1 INTRO ================= -->
+<section id="intro">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱</span><h2>معرفی</h2>
+      <p><strong>ISDS InsightAI</strong> پلتفرم هوشمند تحلیل، داشبورد و گفتگو با داده است. به‌جای مسیر سنتی و طولانی ساخت گزارش، داده‌های سازمان متصل می‌شوند، کاربر سؤال خود را به زبان طبیعی مطرح می‌کند و سامانه تحلیل، نمودار و گزارش را تولید می‌کند. موتور هوش مصنوعی در تمام مراحل کمک می‌کند و فرایند را از حالت کاملاً دستی خارج می‌سازد.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">💬</span>گفتگو با داده</h3><p>پرسش به زبان طبیعی، بدون نیاز به دانش SQL و Query؛ پاسخ در قالب جدول، نمودار یا گزارش.</p></div>
+      <div class="card"><h3><span class="ic">📊</span>داشبورد هوشمند</h3><p>ساخت داشبورد با یک درخواست گفتگویی و اصلاح آن در همان مکالمه.</p></div>
+      <div class="card"><h3><span class="ic">🧭</span>تصمیم‌یاری</h3><p>پاسخ به «چرا؟ چگونه؟ چه کسی باید اقدام کند؟» — فراتر از BI سنتی، در حوزه Decision Intelligence.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 PIPELINE ================= -->
+<section id="pipeline">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۲</span><h2>خط تولید یکپارچه داده</h2>
+      <p>InsightAI کل مسیر از منبع داده تا بینش و اقدام را در یک زنجیره یکپارچه پوشش می‌دهد؛ هر مرحله با کمک موتور هوش مصنوعی انجام می‌شود.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>منابع داده</h3><p>ERP، CRM، سامانه مالی، فایل‌ها<small>Data Sources</small></p></div>
+      <div class="step"><h3>یکپارچه‌سازی</h3><p>اتصال از طریق API و کانکتورها<small>Integration</small></p></div>
+      <div class="step"><h3>فرایند و تبدیل</h3><p>خط تولید داده<small>ETL / ELT</small></p></div>
+      <div class="step"><h3>آماده‌سازی داده</h3><p>پیش و پس از پردازش<small>Pre / Post-processing</small></p></div>
+      <div class="step"><h3>تحلیل هوشمند</h3><p>تحلیل با کمک AI<small>Analytics</small></p></div>
+      <div class="step"><h3>استخراج KPI</h3><p>تعریف خودکار شاخص‌ها<small>KPI Extraction</small></p></div>
+      <div class="step"><h3>داشبورد</h3><p>ساخت با یک درخواست<small>One-click Dashboard</small></p></div>
+      <div class="step"><h3>بینش و اقدام</h3><p>از نمایش داده تا اقدام<small>Insight &amp; Action</small></p></div>
+    </div>
+    <div class="tags" style="margin-top:24px">
+      <span class="tag">📄 Data</span><span class="tag-arrow">→</span>
+      <span class="tag">💬 Conversation</span><span class="tag-arrow">→</span>
+      <span class="tag">🎯 KPI</span><span class="tag-arrow">→</span>
+      <span class="tag">📊 Dashboard</span><span class="tag-arrow">→</span>
+      <span class="tag">💡 Insight</span><span class="tag-arrow">→</span>
+      <span class="tag">🧭 Decision</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 CORE PARTS ================= -->
+<section id="core">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۳</span><h2>بخش‌های اصلی InsightAI</h2>
+      <p>نُه قابلیت اصلی، مسیر کامل از اتصال داده تا تصمیم‌سازی را پوشش می‌دهند.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">🏷️</span>نسل جدید هوش تجاری<span class="no">۰۱</span></h3><p>رویکرد گفتگویی به‌جای مسیر سنتی و دستی ساخت گزارش.</p></div>
+      <div class="card"><h3><span class="ic">💬</span>گفتگو با داده‌های سازمان<span class="no">۰۲</span></h3><p>پرسش به زبان طبیعی و دریافت تحلیل، نمودار یا گزارش.</p></div>
+      <div class="card"><h3><span class="ic">📈</span>ساخت داشبورد با AI<span class="no">۰۳</span></h3><p>تولید خودکار ساختار داشبورد و KPIها با یک درخواست.</p></div>
+      <div class="card"><h3><span class="ic">🎯</span>مدیریت هوشمند KPI<span class="no">۰۴</span></h3><p>تعریف شاخص متناسب با حوزه کسب‌وکار و نیاز سازمان.</p></div>
+      <div class="card"><h3><span class="ic">🔔</span>پایش هوشمند و هشدار<span class="no">۰۵</span></h3><p>پایش دوره‌ای شاخص‌ها و تشخیص وضعیت غیرعادی.</p></div>
+      <div class="card"><h3><span class="ic">📝</span>گزارش‌سازی هوشمند<span class="no">۰۶</span></h3><p>تولید خودکار گزارش‌های جامع و دوره‌ای.</p></div>
+      <div class="card"><h3><span class="ic">🗄️</span>یکپارچگی از Source تا Dashboard<span class="no">۰۷</span></h3><p>اتصال به منابع مختلف و خط تولید ETL/ELT.</p></div>
+      <div class="card"><h3><span class="ic">🧠</span>از BI تا Decision Intelligence<span class="no">۰۸</span></h3><p>پاسخ به سؤالات عمیق تحلیلی، نه فقط «چه اتفاقی افتاده؟».</p></div>
+      <div class="card"><h3><span class="ic">⚡</span>فشرده‌سازی زنجیره تصمیم<span class="no">۰۹</span></h3><p>کاهش فاصله میان داده و تصمیم.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 CAP 01 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۴</span><h2>نسل جدید هوش تجاری</h2>
+      <p>داده سازمان معمولاً در سامانه‌های مختلف پراکنده است: <strong>ERP، CRM، سامانه مالی</strong> و فایل‌های Excel و CSV. مسیر سنتی رسیدن به یک گزارش، طولانی و وابسته به نیروی متخصص است؛ InsightAI این مسیر را به یک گفتگو تبدیل می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>مسیر سنتی در مقابل رویکرد InsightAI</h3>
+        <div class="tags">
+          <span class="tag">استخراج</span><span class="tag-arrow">→</span>
+          <span class="tag">پاکسازی</span><span class="tag-arrow">→</span>
+          <span class="tag">ETL</span><span class="tag-arrow">→</span>
+          <span class="tag">تعریف KPI</span><span class="tag-arrow">→</span>
+          <span class="tag">طراحی داشبورد</span>
+        </div>
+        <p style="margin-top:14px">رویکرد گفتگویی:</p>
+        <div class="tags">
+          <span class="tag tag-alt">اتصال داده</span><span class="tag-arrow">→</span>
+          <span class="tag tag-alt">سؤال به زبان طبیعی</span><span class="tag-arrow">→</span>
+          <span class="tag tag-alt">تحلیل و گزارش</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>حذف وابستگی به تیم BI برای هر گزارش جدید و کاهش زمان رسیدن از داده به نتیجه.</p>
+        <div class="use-case"><b>مثال:</b> به‌جای ثبت درخواست رسمی برای تهیه گزارش فروش فصلی، مدیر مستقیماً سؤال را مطرح می‌کند و گزارش را همان لحظه دریافت می‌کند.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 CAP 02 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۵</span><h2>گفتگو با داده‌های سازمان</h2>
+      <p>هسته اصلی محصول؛ کاربران بدون دانش فنی، سؤال خود را به زبان طبیعی مطرح می‌کنند و سامانه داده مناسب را پیدا، تحلیل و نتیجه را تولید می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>پرسش به <b>زبان طبیعی</b>، بدون نیاز به دانش SQL و Query</li>
+          <li>یافتن خودکار <b>داده مناسب</b> از میان منابع متصل</li>
+          <li>تحلیل داده و تولید نتیجه به‌صورت خودکار</li>
+          <li>خروجی در قالب <b>جدول، نمودار، گزارش یا پاسخ گفتگویی</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>هر سؤال تحلیلی از داده‌های سازمان، بدون واسطه و بدون انتظار برای صف درخواست‌ها.</p>
+        <div class="use-case"><b>مثال:</b> «مهم‌ترین KPIهای فروش را نشان بده» ← تحلیل داده ← نمودار + پاسخ طبیعی.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 CAP 03 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۶</span><h2>ساخت داشبورد با هوش مصنوعی</h2>
+      <p>برای ساخت داشبورد کافی است درخواست خود را به زبان طبیعی بیان کنید؛ سامانه ساختار پیشنهادی، شاخص‌ها و نمودارهای مناسب را تولید می‌کند و در همان گفتگو قابل اصلاح است.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+      <ul class="feat">
+        <li>«برای مدیریت فروش داشبورد می‌خواهم» ← <b>پیشنهاد ساختار و KPIها</b></li>
+        <li>اصلاح گفتگویی: تغییر بازه زمانی، افزودن فیلتر، تغییر حالت نمایش</li>
+        <li>ساخت سریع داشبورد برای هر نقش و واحد سازمانی</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">🎯 KPI Card</span>
+        <span class="tag">📈 Trend</span>
+        <span class="tag">📊 Bar / Line / Pie Chart</span>
+        <span class="tag">📋 Table</span>
+        <span class="tag">⚖️ Comparison</span>
+        <span class="tag">🧮 Distribution</span>
+      </div>
+      <div class="use-case"><b>مثال:</b> مدیر فروش داشبوردی می‌خواهد؛ سامانه KPIهای کلیدی، روند فروش و نمودار مقایسه‌ای را پیشنهاد می‌دهد و با درخواست «فقط سه ماه اخیر» داشبورد به‌روزرسانی می‌شود.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 CAP 04 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۷</span><h2>استخراج و مدیریت هوشمند KPI</h2>
+      <p>سامانه شاخص‌های کلیدی عملکرد را متناسب با حوزه کسب‌وکار، داده موجود و نیاز سازمان تعریف و مدیریت می‌کند.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="mini">
+        <h3>شاخص‌های فروش</h3>
+        <p>درآمد (Revenue)، نرخ تبدیل (Conversion Rate)، حفظ مشتری (Customer Retention) و سایر شاخص‌های مرتبط با حوزه فروش.</p>
+      </div>
+      <div class="mini">
+        <h3>شاخص‌های منابع انسانی</h3>
+        <p>نرخ خروج کارکنان (Turnover)، غیبت (Absenteeism)، زمان استخدام (Hiring Time) و سایر شاخص‌های حوزه سرمایه انسانی.</p>
+      </div>
+    </div>
+    <div class="use-case" style="margin-top:20px"><b>کاربرد:</b> تعریف خودکار KPI برای هر حوزه کسب‌وکار بر اساس داده واقعی سازمان. سایر حوزه‌ها نیز با همین رویکرد و متناسب با داده و نیاز سازمان پوشش داده می‌شوند.</div>
+  </div>
+</section>
+
+<!-- ================= 8 CAP 05 ================= -->
+<section id="gov">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۸</span><h2>پایش هوشمند و هشدار</h2>
+      <p>شاخص‌ها به‌صورت دوره‌ای پایش می‌شوند و در صورت عبور از آستانه تعریف‌شده یا مشاهده وضعیت غیرعادی، هشدار مناسب ارسال می‌شود.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>پایش دوره‌ای KPIها بر اساس <b>Threshold</b> تعریف‌شده</li>
+          <li>ارسال <b>هشدار و Notification</b> به افراد مرتبط</li>
+          <li><b>Anomaly Detection:</b> تشخیص وضعیت غیرعادی با یادگیری از داده</li>
+          <li>هشدار هوشمند به‌جای بررسی دستی مداوم گزارش‌ها</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>آگاهی به‌موقع از افت عملکرد و رخدادهای غیرعادی، بدون بررسی دستی روزانه.</p>
+        <div class="use-case"><b>مثال:</b> افت ۱۵ درصدی فروش ← هشدار به مدیر؛ تکرار غیرعادی یک مورد در روز ← اطلاع‌رسانی خودکار.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9 CAP 06 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۹</span><h2>گزارش‌سازی هوشمند</h2>
+      <p>گزارش‌های دوره‌ای و مدیریتی به‌صورت خودکار تولید می‌شوند؛ شامل تغییرات KPIها، روندها و نمودارهای مرتبط در یک گزارش جامع.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+        <ul class="feat">
+          <li>«گزارش هفتگی عملکرد فروش شهریور را آماده کن» ← <b>تولید خودکار</b></li>
+          <li>جمع‌بندی تغییرات KPIها و روندها در یک گزارش جامع</li>
+          <li>نمودارها و مصورسازی‌های مرتبط با موضوع گزارش</li>
+          <li>مناسب <b>جلسات مدیریتی</b> و گزارش‌های دوره‌ای</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>کاربرد</h3>
+        <p>کاهش زمان تهیه گزارش‌های تکراری و آزادسازی ظرفیت تیم تحلیل.</p>
+        <div class="use-case"><b>مثال:</b> گزارش هفتگی عملکرد فروش پیش از جلسه مدیریتی به‌صورت خودکار آماده و در اختیار اعضا قرار می‌گیرد.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 CAP 07 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۰</span><h2>یکپارچگی از منبع داده تا داشبورد</h2>
+      <p>InsightAI کل خط تولید داده را پوشش می‌دهد: از اتصال به منابع مختلف تا لایه تحلیلیِ اعتبارسنجی‌شده که مبنای داشبورد و گزارش است.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>قابلیت‌ها</h3>
+      <ul class="feat">
+        <li>اتصال به منابع مختلف: <b>API، پایگاه‌های داده، فایل‌ها</b></li>
+        <li>حاکمیت داده، مدیریت دسترسی‌ها و سیاست‌های آن</li>
+        <li>مراحل <b>Pre / Post-processing</b> برای آماده‌سازی داده</li>
+        <li>خط تولید <b>ETL / ELT</b>: از ورود داده تا لایه تحلیلیِ اعتبارسنجی‌شده</li>
+      </ul>
+      <div class="use-case"><b>کاربرد:</b> سازمانی که داده‌هایش در چند سامانه پراکنده است، با یک خط تولید یکپارچه به نمای واحد و قابل اعتماد از شاخص‌ها می‌رسد.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 CAP 08 ================= -->
+<section id="decision">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۱</span><h2>از BI تا Decision Intelligence</h2>
+      <p>هدف نهایی فقط پاسخ به «چه اتفاقی افتاده؟» نیست؛ InsightAI به سؤالات عمیق‌تر پاسخ می‌دهد و فراتر از Conversational BI، در حوزه <strong>Decision Intelligence</strong> قرار می‌گیرد.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="mini"><h3>چرا؟</h3><p>تحلیل ریشه و عوامل مؤثر بر وضعیت فعلی، نه صرفاً نمایش اعداد.</p></div>
+      <div class="mini"><h3>چگونه؟</h3><p>بررسی مسیرها و عوامل شکل‌گیرنده روند و ارائه بینش تحلیلی.</p></div>
+      <div class="mini"><h3>چه کسی باید اقدام کند؟ ریسک چیست؟</h3><p>تعیین اقدام مرتبط و ریسک‌ها برای تبدیل بینش به تصمیم.</p></div>
+    </div>
+    <div class="use-case" style="margin-top:20px"><b>کاربرد:</b> تبدیل داشبورد از «نمایشگر داده» به «دستیار تصمیم»؛ مدیر نه فقط وضعیت را می‌بیند، بلکه زمینه تصمیم و اقدام را دریافت می‌کند.</div>
+  </div>
+</section>
+
+<!-- ================= 12 CAP 09 ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۲</span><h2>فشرده‌سازی زنجیره تصمیم</h2>
+      <p>ارزش اصلی InsightAI، <strong>کاهش فاصله بین داده و تصمیم</strong> است؛ کاربر از «مصرف‌کننده گزارش» به <strong>تصمیم‌ساز</strong> تبدیل می‌شود و هم‌زمان <strong>Governance</strong>، کیفیت داده و مستندسازی تحلیلی حفظ می‌شود.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3><span class="ic">🐌</span>زنجیره سنتی</h3>
+        <div class="tags">
+          <span class="tag">کاربر</span><span class="tag-arrow">←</span>
+          <span class="tag">تحلیلگر</span><span class="tag-arrow">←</span>
+          <span class="tag">BI</span><span class="tag-arrow">←</span>
+          <span class="tag">داده</span><span class="tag-arrow">←</span>
+          <span class="tag">گزارش</span><span class="tag-arrow">←</span>
+          <span class="tag">مدیر</span>
+        </div>
+        <p style="margin-top:12px;color:var(--gray);font-size:.92rem">هر حلقه، زمان و وابستگی به افراد متخصص اضافه می‌کند.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ic">⚡</span>زنجیره با InsightAI</h3>
+        <div class="tags">
+          <span class="tag tag-alt">مدیر</span><span class="tag-arrow">←</span>
+          <span class="tag tag-alt">AI</span><span class="tag-arrow">←</span>
+          <span class="tag tag-alt">داده</span><span class="tag-arrow">←</span>
+          <span class="tag tag-alt">Insight</span>
+        </div>
+        <p style="margin-top:12px;color:var(--gray);font-size:.92rem">میانجی‌های غیرضروری حذف و تصمیم‌سازی تسریع می‌شود.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 13 WHY ================= -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۳</span><h2>چرا InsightAI؟</h2>
+      <p>جمع‌بندی مزایای رویکرد گفتگومحور در مقایسه با BI سنتی.</p>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>مزیت‌های کلیدی</h3>
+      <ul class="feat">
+        <li>حذف وابستگی به تیم BI برای هر سؤال ساده و گزارش جدید</li>
+        <li>سؤال با زبان طبیعی ← پاسخ به زبان طبیعی</li>
+        <li>پوشش کامل زنجیره: <b>Data ← Insight ← Action</b></li>
+        <li><b>BI Automation</b>، پایش KPI و تشخیص ناهنجاری</li>
+        <li>تصمیم‌گیری <b>سریع‌تر، گسترده‌تر و مبتنی بر داده</b></li>
+      </ul>
+      <div class="tags">
+        <span class="tag">📉 تحلیل انحراف از هدف</span>
+        <span class="tag">🔍 Drill-down تحلیلی</span>
+        <span class="tag">🗂️ یک نمای یکپارچه از شاخص‌ها</span>
+      </div>
+      <div class="use-case"><b>نتیجه:</b> از داده خام تا تصمیم هوشمند، فقط با یک گفتگو فاصله است — <b>From Raw Data to Intelligent Decisions — Through Conversation.</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14 SOLUTIONS ================= -->
+<section id="solutions">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۴</span><h2>نمونه راهکارهای قابل ساخت</h2>
+      <p>این نمونه‌ها مسیرهای استفاده از قابلیت‌های InsightAI هستند؛ پیاده‌سازی هر راهکار بر اساس داده، فرایند و معیار پذیرش سازمان انجام می‌شود.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3><span class="ic">📊</span>داشبورد مدیریتی فروش</h3><p>ساخت داشبورد با یک درخواست؛ شامل KPIهای فروش، روند و مقایسه دوره‌ای با امکان اصلاح گفتگویی.</p></div>
+      <div class="card"><h3><span class="ic">🔔</span>پایش و هشدار عملکرد</h3><p>پایش دوره‌ای شاخص‌ها، هشدار افت عملکرد و تشخیص ناهنجاری با Anomaly Detection.</p></div>
+      <div class="card"><h3><span class="ic">📝</span>گزارش‌های دوره‌ای مدیریتی</h3><p>تولید خودکار گزارش‌های هفتگی و ماهانه برای جلسات مدیریت، با نمودار و جمع‌بندی روند.</p></div>
+      <div class="card"><h3><span class="ic">👥</span>داشبورد منابع انسانی</h3><p>پایش شاخص‌های Turnover، غیبت و زمان استخدام بر اساس داده منابع انسانی سازمان.</p></div>
+      <div class="card"><h3><span class="ic">🧭</span>تحلیل انحراف و ریشه‌یابی</h3><p>بررسی انحراف از هدف، تحلیل ریشه با Drill-down و پاسخ به سؤالات «چرا» و «چگونه».</p></div>
+      <div class="card"><h3><span class="ic">🗂️</span>نمای یکپارچه شاخص‌ها</h3><p>یکپارچه‌سازی داده پراکنده در ERP، CRM و سامانه مالی در یک نمای واحد و قابل اعتماد.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 15 DEPLOY / CTA ================= -->
+<section id="contact" style="border-bottom:none">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">۱۵</span><h2>استقرار و شروع همکاری</h2>
+      <p>InsightAI با رویکرد استفاده سازمانی و امکان <strong>استقرار در زیرساخت داخلی</strong> ارائه می‌شود. منابع داده متصل، سیاست‌های حاکمیت داده، سطح دسترسی کاربران و شاخص‌های مورد پایش بر اساس نیاز و ساختار سازمان تعیین می‌شوند.</p>
+      <p>دامنه تحلیل، کیفیت پاسخ‌ها و امکانات قابل ارائه در هر استقرار، به داده‌های متصل و منابع اختصاص‌یافته وابسته است.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>بررسی کاربرد</h3><p>انتخاب یک حوزه تحلیلی و نمونه‌ای از داده‌های مرتبط به‌عنوان مبنای بررسی.</p></div>
+      <div class="step"><h3>اتصال منابع داده</h3><p>اتصال به API، پایگاه داده یا فایل‌های سازمان و تنظیم حاکمیت و دسترسی‌ها.</p></div>
+      <div class="step"><h3>نسخه اولیه</h3><p>پاسخ به سؤالات واقعی کاربران و ساخت داشبورد اولیه روی داده واقعی.</p></div>
+      <div class="step"><h3>توسعه و پایش</h3><p>افزودن پایش KPI، هشدارها و گزارش‌های دوره‌ای بر اساس نتیجه ارزیابی.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<div class="cta">
+  <h2>از داده خام تا تصمیم هوشمند — فقط با یک گفتگو</h2>
+  <p>برای مشاهده قابلیت‌ها و بررسی کاربرد مورد نظر سازمان خود، با تیم ISDS در ارتباط باشید.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#">درخواست دمو</a>
+    <a class="btn btn-ghost" href="#">بررسی سناریوی سازمانی</a>
+  </div>
+</div>
+
+<footer>
+  کاتالوگ قابلیت‌های <b>ISDS INSIGHTAI</b> — پلتفرم گفتگومحور BI و تصمیم‌یاری سازمانی
+</footer>
+
+<a href="#" class="top" title="بازگشت به بالا">↑</a>
+
+</body>
+</html>
